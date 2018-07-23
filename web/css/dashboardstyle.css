@@ -1,44 +1,8 @@
-/* #income {
-    display:none;
-} */
-
 #overview {
 	float:left;
 	width:50%;
 	/* background-color:yellow; */
 	height:100%;
-}
-
-#overview .panel-body {
-    height:100%;
-}
-
-#income_label {
-    position: relative;
-    left: 31%;
-    float: left;
-}
-#outcome_label {
-    position: relative;
-    float: right;
-    right: 32%;
-}
-
-#bilanz {
-    margin: 25px;
-    font-size: 20px;
-    text-align: center;
-    text-decoration: underline;
-}
-
-#bilanz_number {
-    font-weight: bold;
-    
-    color: #608d00;	/* --- IE --- */
-    color: rgba(96,141,0,0.8);
-    /* ODER */
-/*    color: #d23648;	 --- IE --- 
-    color: rgba(210,54,72,0.8);*/
 }
 
 #overview .panel-body {
