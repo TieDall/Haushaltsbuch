@@ -38,120 +38,118 @@
             <h1>Haushaltsbuch</h1>
 	</div>
 	<div id="content">
-            <div id="overview" class="panel panel-default">
-                <div class="panel panel-heading">
-                        aktueller Monat: Juli
-                </div>
-                <div class="panel panel-body">
-                    <div class="css_bar_graph">
-
-                        <!-- y_axis labels -->
-                        <ul class="y_axis">
-                                <li>2000€</li><li>1600€</li><li>1200€</li><li>800€</li><li>400€</li><li>0€</li>
-                        </ul>
-
-                        <!-- x_axis labels -->
-                        <ul class="x_axis">
-                                <li>Einnahmen</li><li>Ausgaben</li>
-                        </ul>
-
-                        <!-- graph -->
-                        <div class="graph">
-                                <!-- grid -->
-                            <ul class="grid">
-                                <li><!-- 100 --></li>
-                                <li><!-- 80 --></li>
-                                <li><!-- 60 --></li>
-                                <li><!-- 40 --></li>
-                                <li><!-- 20 --></li>
-                                <li class="bottom"><!-- 0 --></li>
-                            </ul>
-
-                            <!-- bars -->
-                            <!-- 250px = 100% -->
-                            <ul>
-                                <li class="bar nr_1 green" style="height: 225px;"><div class="top"></div><div class="bottom"></div><span>2000€</span></li>
-                                <li class="bar nr_2 red" style="height: 112px;"><div class="top"></div><div class="bottom"></div><span>1000€</span></li>
-                            </ul>	
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div id="list" class="panel panel-default">
-                <div class="panel-heading">
-                        Zuletzt erfasste Ausgaben:
-                </div>
-                <div class="table-responsive panel-body">
-                    <table width="100%" class="table-hover table">
-                        <thead>
-                            <tr>
-                                <td>Datum</td>
-                                <td>Kategorie</td>
-                                <td>Betrag</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="3">
-                                    <button style="width:100%" onclick="modal()" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                            <tr>
-                                <td>20.07.2018</td>
-                                <td>Lebensmittel</td>
-                                <td>21,87€</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+		<div id="overview" class="panel panel-default">
+			<div class="panel panel-heading">aktueller Monat: Juli</div>
+			<div class="panel panel-body">
+                            <div class="css_bar_graph">
+                                <!-- graph -->
+                                <div class="graph">
+                                    <!-- grid -->
+                                    <ul class="grid">
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li class="bottom"></li>
+                                    </ul>
+                                    <!-- bars -->
+                                    <!-- 250px = 100% -->
+                                    <ul>
+                                        <li id="income_bar" class="bar nr_1 green" style="height: 250px;">
+                                            <div class="top"></div>
+                                            <div class="bottom"></div>
+                                            <span>2000€</span>
+                                        </li>
+                                        <li id="outcome_bar" class="bar nr_2 red" style="height: 125px;">
+                                            <div class="top"></div>
+                                            <div class="bottom"></div>
+                                            <span>1000€</span>
+                                        </li>
+                                    </ul>	
+                                </div>
+                            </div>
+                            <div id="additionalInfo">
+                                <p id="income_label">Einnahmen</p>
+                                <p id="outcome_label">Ausgaben</p>
+                                <br/>
+                                <p id="bilanz">Bilanz: <span id="bilanz_number">1000€</span></p>
+                            </div>
+			</div>
+		</div>
+		<div id="list" class="panel panel-default">
+			<div class="panel-heading">
+				Zuletzt erfasste Ausgaben:
+			</div>
+			<div class="table-responsive panel-body">
+				<table width="100%" class="table-hover table">
+					<thead>
+						<tr>
+							<td>Datum</td>
+							<td>Kategorie</td>
+							<td>Betrag</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="3">
+								<button style="width:100%" type="button" onclick="modal()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
+							</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+						<tr>
+							<td>20.07.2018</td>
+							<td>Lebensmittel</td>
+							<td>21,87€</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 	<div id="footer">
             <p>Version: 0.1</p>
