@@ -41,6 +41,17 @@ Contributor(s):
 -->
 <hibernate-configuration>
   <session-factory>
-
-    </session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/haushaltsbuch?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"/>
+    <mapping resource="blub/DiscountCode.hbm.xml"/>
+    <mapping resource="blub/Manufacturer.hbm.xml"/>
+    <mapping resource="blub/Product.hbm.xml"/>
+    <mapping resource="blub/ProductCode.hbm.xml"/>
+    <mapping resource="blub/Customer.hbm.xml"/>
+    <mapping resource="blub/PurchaseOrder.hbm.xml"/>
+    <mapping resource="blub/MicroMarket.hbm.xml"/>
+  </session-factory>
 </hibernate-configuration>
