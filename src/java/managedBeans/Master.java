@@ -19,7 +19,7 @@ public class Master {
     ArrayList<Payments> payments;
     
     String heightIncome = "250";
-    String heightOutcome = "12";
+    String heightOutcome = "125";
     
     public Master() {
         this.payments = new ArrayList<>();

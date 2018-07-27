@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24.07.2018 14:18:10 by Hibernate Tools 4.3.1 -->
+<!-- Generated 27.07.2018 23:57:36 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.Category" table="category" catalog="haushaltsbuch" optimistic-lock="version">
-        <id name="id" type="int">
+        <id name="id" type="java.lang.Integer">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="name" type="string">
             <column name="name" length="50" not-null="true" unique="true" />
@@ -19,7 +19,7 @@
         </property>
         <set name="paymentses" table="payments" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="cateoryID" not-null="true" />
+                <column name="categoryID" not-null="true" />
             </key>
             <one-to-many class="model.Payments" />
         </set>
