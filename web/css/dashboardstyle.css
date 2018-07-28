@@ -24,17 +24,18 @@
     margin: 25px;
     font-size: 20px;
     text-align: center;
-    text-decoration: underline;
 }
 
-#bilanz_number {
+#bilanz_positiv {
     font-weight: bold;
-    
     color: #608d00;	/* --- IE --- */
     color: rgba(96,141,0,0.8);
-    /* ODER */
-/*    color: #d23648;	 --- IE --- 
-    color: rgba(210,54,72,0.8);*/
+}
+
+#bilanz_negativ {
+    font-weight: bold;
+    color: #d23648;	/* --- IE --- */
+    color: rgba(210,54,72,0.8);
 }
 
 #list {

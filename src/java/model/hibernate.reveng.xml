@@ -42,6 +42,6 @@ Contributor(s):
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="haushaltsbuch"/>
   <table-filter match-name="person"/>
-  <table-filter match-name="category"/>
   <table-filter match-name="payments"/>
+  <table-filter match-name="category"/>
 </hibernate-reverse-engineering>

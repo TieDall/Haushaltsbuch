@@ -1,5 +1,5 @@
 package model;
-// Generated 24.07.2018 14:18:10 by Hibernate Tools 4.3.1
+// Generated 27.07.2018 23:57:36 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class Payments  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private Category category;
      private Person person;
      private float amount;
@@ -21,14 +21,12 @@ public class Payments  implements java.io.Serializable {
     }
 
 	
-    public Payments(int id, Category category, Person person, float amount) {
-        this.id = id;
+    public Payments(Category category, Person person, float amount) {
         this.category = category;
         this.person = person;
         this.amount = amount;
     }
-    public Payments(int id, Category category, Person person, float amount, String note, Date created) {
-       this.id = id;
+    public Payments(Category category, Person person, float amount, String note, Date created) {
        this.category = category;
        this.person = person;
        this.amount = amount;
@@ -36,11 +34,11 @@ public class Payments  implements java.io.Serializable {
        this.created = created;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public Category getCategory() {
