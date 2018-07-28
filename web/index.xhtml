@@ -59,12 +59,12 @@
                                         <li id="income_bar" class="bar nr_1 green" style="height: #{master.heightIncome}px;">
                                             <div class="top"></div>
                                             <div class="bottom"></div>
-                                            <span>2000€</span>
+                                            <span>#{master.sumIncome}€</span>
                                         </li>
                                         <li id="outcome_bar" class="bar nr_2 red" style="height: #{master.heightOutcome}px;">
                                             <div class="top"></div>
                                             <div class="bottom"></div>
-                                            <span>1000€</span>
+                                            <span>#{master.sumOutcome}€</span>
                                         </li>
                                     </ul>	
                                 </div>
@@ -73,7 +73,7 @@
                                 <p id="income_label">Einnahmen</p>
                                 <p id="outcome_label">Ausgaben</p>
                                 <br/>
-                                <p id="bilanz">Bilanz: <span id="bilanz_number">1000€</span></p>
+                                <p id="bilanz">Bilanz: <span id="#{master.balanceCss}">#{master.balance}€</span></p>
                             </div>
 			</div>
 		</div>
@@ -82,72 +82,25 @@
 				Zuletzt erfasste Ausgaben:
 			</div>
 			<div class="table-responsive panel-body">
-				<table width="100%" class="table-hover table">
-					<thead>
-						<tr>
-							<td>Datum</td>
-							<td>Kategorie</td>
-							<td>Betrag</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan="3">
-								<button style="width:100%" type="button" onclick="modal()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
-							</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-						<tr>
-							<td>20.07.2018</td>
-							<td>Lebensmittel</td>
-							<td>21,87€</td>
-						</tr>
-					</tbody>
-				</table>
+                                
+                            <button style="width:100%" type="button" onclick="modal()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
+				<h:dataTable value="#{master.listLastTen}" var="pay" 
+                                                styleClass="table-hover table">
+                                        <h:column>
+                                                <f:facet name = "header">Datum</f:facet>    				
+                                                <h:outputText value="#{pay.created}">
+                                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                                                </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                                <f:facet name = "header">Kategorie</f:facet>    				
+                                                #{pay.category.name}
+                                        </h:column>
+                                        <h:column>
+                                                <f:facet name = "header">Betrag</f:facet>    				
+                                                #{pay.amount}
+                                        </h:column>
+                                </h:dataTable>
 			</div>
 		</div>
 	</div>
