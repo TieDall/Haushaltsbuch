@@ -1,4 +1,5 @@
 # Haushaltsbuch
+Ziel des Projektes „Haushaltsbuch“ ist die Entwicklung einer Open Source Webanwendung. Die Anwendung soll es ermöglichen die Finanzen einer Einzelperson oder einer Lebensgemeinschaft übersichtlich und transparent aufzubereiten. Dazu können Zahlungen erfasst werden und Auswertungen gemacht werden.
 ## Getting Started
 ### Aufsetzen MySQL-Datenbank
 ```
@@ -32,3 +33,5 @@ CREATE TABLE IF NOT EXISTS Payments (
   FOREIGN KEY (personID) REFERENCES Person (ID)
 ); 
 ```
+### Aufsetzen Hibernate
+Die Anwendung nutzt das Framework "Hibernate" zur Kommunikation mit einer MySQL-Datenbank. In der Konfigurationsdatei "hibernate.cfg" sind die Parameter der Datenbank einzutragen.
