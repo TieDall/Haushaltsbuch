@@ -181,11 +181,10 @@
                                                     <p>Person:</p>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="Torsten">Torsten</option>
-                                                        <option value="Herrmann">Herrmann</option>
-                                                        <option value="Tom">Tom</option>                                                
-                                                    </select>
+                                                    <h:selectOneMenu>
+                                                        <f:selectItems value="#{master.person}" var="p"
+                                                                       itemLabel="#{p.name}" itemValue="#{p.name}" />
+                                                    </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
                                                 </td>
                                             </tr>
@@ -229,11 +228,10 @@
                                                     <p>Person:</p>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="Torsten">Torsten</option>
-                                                        <option value="Herrmann">Herrmann</option>
-                                                        <option value="Tom">Tom</option>                                                
-                                                    </select>
+                                                    <h:selectOneMenu>
+                                                        <f:selectItems value="#{master.person}" var="p"
+                                                                       itemLabel="#{p.name}" itemValue="#{p.name}" />
+                                                    </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
                                                 </td>
                                             </tr>

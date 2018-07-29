@@ -8,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import model.Category;
 import model.Payments;
+import model.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -33,6 +34,7 @@ public class Master {
     // data form
     List<Category> categoriesIncome;
     List<Category> categoriesOutcome;
+    List<Person> person;
     
     public Master() {        
         
@@ -40,6 +42,19 @@ public class Master {
         
         this.updateData();
         
+    }
+    
+    private void loadPersons() {
+        session.beginTransaction();
+        List<Person> result = session.createQuery( "from Person" ).list();
+        ArrayList<Person> bufferPerson = new ArrayList<>();
+        for (Person per : result) {
+            if (!per.isIsDeleted()) {
+                bufferPerson.add(per);
+            }
+        }
+        this.person = bufferPerson.subList(0, bufferPerson.size());
+        session.getTransaction().commit();
     }
     
     private void loadCategories() {
@@ -58,6 +73,7 @@ public class Master {
         }
         this.categoriesIncome = bufferIncome.subList(0, bufferIncome.size());
         this.categoriesOutcome = bufferOutcome.subList(0, bufferOutcome.size());
+        session.getTransaction().commit();
     }
 
     /**
@@ -67,7 +83,7 @@ public class Master {
         this.connectToDB();
         this.updateDashboardOverview();
         this.updateDashboardList();
-        
+        this.loadPersons();
         this.loadCategories();
         this.disconnectFromDB();
     }
@@ -248,6 +264,14 @@ public class Master {
 
     public void setCategoriesOutcome(List<Category> categoriesOutcome) {
         this.categoriesOutcome = categoriesOutcome;
+    }
+
+    public List<Person> getPerson() {
+        return person;
+    }
+
+    public void setPerson(List<Person> person) {
+        this.person = person;
     }
     
     
