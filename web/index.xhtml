@@ -59,12 +59,20 @@
                                         <li id="income_bar" class="bar nr_1 green" style="height: #{master.heightIncome}px;">
                                             <div class="top"></div>
                                             <div class="bottom"></div>
-                                            <span>#{master.sumIncome}€</span>
+                                            <span>
+                                                <h:outputText value="#{master.sumIncome}">
+                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
+                                                </h:outputText>€
+                                            </span>
                                         </li>
                                         <li id="outcome_bar" class="bar nr_2 red" style="height: #{master.heightOutcome}px;">
                                             <div class="top"></div>
                                             <div class="bottom"></div>
-                                            <span>#{master.sumOutcome}€</span>
+                                            <span>
+                                                <h:outputText value="#{master.sumOutcome}">
+                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
+                                                </h:outputText>€
+                                            </span>
                                         </li>
                                     </ul>	
                                 </div>
@@ -73,7 +81,13 @@
                                 <p id="income_label">Einnahmen</p>
                                 <p id="outcome_label">Ausgaben</p>
                                 <br/>
-                                <p id="bilanz">Bilanz: <span id="#{master.balanceCss}">#{master.balance}€</span></p>
+                                <p id="bilanz">Bilanz: 
+                                    <span id="#{master.balanceCss}">
+                                        <h:outputText value="#{master.balance}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
+                                        </h:outputText>€
+                                    </span>
+                                </p>
                             </div>
 			</div>
 		</div>
@@ -100,8 +114,7 @@
                                                 <f:facet name = "header">Betrag</f:facet>    				
                                                 <h:outputText value="#{pay.amount}">
                                                     <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                                </h:outputText>
-                                                <span>€</span>
+                                                </h:outputText>€
                                         </h:column>
                                 </h:dataTable>
 			</div>
