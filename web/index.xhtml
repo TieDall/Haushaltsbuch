@@ -89,16 +89,19 @@
                                         <h:column>
                                                 <f:facet name = "header">Datum</f:facet>    				
                                                 <h:outputText value="#{pay.created}">
-                                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                                                    <f:convertDateTime pattern="dd.MM.yyyy" />
                                                 </h:outputText>
                                         </h:column>
                                         <h:column>
-                                                <f:facet name = "header">Kategorie</f:facet>    				
+                                                <f:facet name = "header">Kategorie</f:facet>
                                                 #{pay.category.name}
                                         </h:column>
                                         <h:column>
                                                 <f:facet name = "header">Betrag</f:facet>    				
-                                                #{pay.amount}
+                                                <h:outputText value="#{pay.amount}">
+                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
+                                                </h:outputText>
+                                                <span>€</span>
                                         </h:column>
                                 </h:dataTable>
 			</div>

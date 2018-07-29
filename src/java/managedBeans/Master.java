@@ -24,9 +24,9 @@ public class Master {
     // data dashboard
     String heightIncome = "0";
     String heightOutcome = "0";
-    String sumOutcome = "0";
-    String sumIncome = "0";
-    String balance = "0";
+    float sumOutcome = 0;
+    float sumIncome = 0;
+    float balance = 0;
     String balanceCss = "";
     ArrayList<Payments> listLastTen = new ArrayList<>();
     
@@ -104,9 +104,9 @@ public class Master {
         for (Payments outcome : outcomes) {
             outcome_sum = outcome_sum + outcome.getAmount();
         }
-        this.sumIncome = "" + income_sum;
-        this.sumOutcome = "" + outcome_sum;
-        this.balance = "" + (income_sum-outcome_sum);
+        this.sumIncome = income_sum;
+        this.sumOutcome = outcome_sum;
+        this.balance = (income_sum-outcome_sum);
         if ((income_sum-outcome_sum) >= 0) {
             this.balanceCss = "bilanz_positiv";
         } else {
@@ -149,27 +149,27 @@ public class Master {
         this.heightOutcome = heightOutcome;
     }
 
-    public String getSumOutcome() {
+    public float getSumOutcome() {
         return sumOutcome;
     }
 
-    public void setSumOutcome(String sumOutcome) {
+    public void setSumOutcome(float sumOutcome) {
         this.sumOutcome = sumOutcome;
     }
 
-    public String getSumIncome() {
+    public float getSumIncome() {
         return sumIncome;
     }
 
-    public void setSumIncome(String sumIncome) {
+    public void setSumIncome(float sumIncome) {
         this.sumIncome = sumIncome;
     }
 
-    public String getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 
