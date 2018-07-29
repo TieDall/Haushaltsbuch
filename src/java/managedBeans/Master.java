@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import model.Category;
 import model.Payments;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,12 +30,34 @@ public class Master {
     String balanceCss = "";
     ArrayList<Payments> listLastTen = new ArrayList<>();
     
+    // data form
+    List<Category> categoriesIncome;
+    List<Category> categoriesOutcome;
+    
     public Master() {        
         
         this.payments = new ArrayList<>();
         
         this.updateData();
         
+    }
+    
+    private void loadCategories() {
+        session.beginTransaction();
+        List<Category> result = session.createQuery( "from Category" ).list();
+        ArrayList<Category> bufferIncome = new ArrayList<>();
+        ArrayList<Category> bufferOutcome = new ArrayList<>();
+        for (Category cat : result) {
+            if (!cat.isIsDeleted()) {
+                if (cat.isIsIncome()) {
+                    bufferIncome.add(cat);
+                } else {
+                    bufferOutcome.add(cat);
+                }
+            }
+        }
+        this.categoriesIncome = bufferIncome.subList(0, bufferIncome.size());
+        this.categoriesOutcome = bufferOutcome.subList(0, bufferOutcome.size());
     }
 
     /**
@@ -44,6 +67,8 @@ public class Master {
         this.connectToDB();
         this.updateDashboardOverview();
         this.updateDashboardList();
+        
+        this.loadCategories();
         this.disconnectFromDB();
     }
     
@@ -207,6 +232,22 @@ public class Master {
 
     public void setListLastTen(ArrayList<Payments> listLastTen) {
         this.listLastTen = listLastTen;
+    }
+
+    public List<Category> getCategoriesIncome() {
+        return categoriesIncome;
+    }
+
+    public void setCategoriesIncome(List<Category> categoriesIncome) {
+        this.categoriesIncome = categoriesIncome;
+    }
+
+    public List<Category> getCategoriesOutcome() {
+        return categoriesOutcome;
+    }
+
+    public void setCategoriesOutcome(List<Category> categoriesOutcome) {
+        this.categoriesOutcome = categoriesOutcome;
     }
     
     
