@@ -3,7 +3,6 @@ package managedBeans;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -34,17 +33,30 @@ public class Master {
         
         this.payments = new ArrayList<>();
         
+        this.updateData();
+        
+    }
+
+    /**
+     * Updates data for visualisation.
+     */
+    private void updateData() {
         this.connectToDB();
         this.updateDashboardOverview();
         this.updateDashboardList();
         this.disconnectFromDB();
-        
-    }    
+    }
     
+    /**
+     * Disconnect from database.
+     */
     private void disconnectFromDB() {
         session.close();
     }
     
+    /**
+     * Connect to database.
+     */
     private void connectToDB() {
         sessionFactory = new Configuration()
             .configure("/model/hibernate.cfg.xml")
@@ -56,6 +68,10 @@ public class Master {
         session.getTransaction().commit();
     }
     
+    /**
+     * Updates data for list on dashboard.
+     * NOTE: connection to database needed.
+     */
     private void updateDashboardList() {
         // extract last 10 created data items
         ArrayList<Payments> paymentCal = new ArrayList<>();
@@ -73,6 +89,10 @@ public class Master {
         
     }
     
+    /**
+     * Updates data for overview on dashboard.
+     * NOTE: connection to database needed.
+     */
     private void updateDashboardOverview() {        
         // extract data which was created in current month
         ArrayList<Payments> paymentsCal = new ArrayList<>();
