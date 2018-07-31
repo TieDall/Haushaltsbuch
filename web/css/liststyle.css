@@ -1,0 +1,23 @@
+.tab-content {
+    position: fixed;
+    top: 142px;
+    bottom:30px;
+    right:0px;
+    left:250px;
+}
+
+#incomeTab {
+    height: 100%;
+    overflow: auto;
+}
+
+#outcomeTab {
+    height: 100%;
+    overflow: auto;
+}
+
+.selectionIntervall {
+    margin: 20px;
+    float: left;
+}
+

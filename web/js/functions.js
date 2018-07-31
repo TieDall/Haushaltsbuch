@@ -26,3 +26,32 @@ function outcome() {
     x.style.display = "block"; 
     y.style.display = "none";
 } 
+
+
+
+function drawChart() {
+    //income
+    var dataIn = google.visualization.arrayToDataTable([
+        ['Kategorie', '€'],
+        ['Gehalt', 1400.32],
+        ['Sozialhilfen', 192]
+        ]);
+
+    var options = {
+        is3D: true,
+        legend: 'bottom'
+    };
+
+    var chartIn = new google.visualization.PieChart(document.getElementById('piechartIncome'));
+    chartIn.draw(dataIn, options);
+    
+    // outcome
+    var dataOut = google.visualization.arrayToDataTable([
+        ['Kategorie', '€'],
+        ['Miete', 410],
+        ['Kleidung', 80]
+        ]);
+
+    var chartOut = new google.visualization.PieChart(document.getElementById('piechartOutcome'));
+    chartOut.draw(dataOut, options);
+}

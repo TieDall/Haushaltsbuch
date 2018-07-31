@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Haushaltsbuch</title>
+        
+        <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="css/sharedstyle.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/liststyle.css" media="screen" />
+	<script src="js/functions.js"></script>
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script> 
+        
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+        </script>
+    </h:head>
+    <h:body>
+        <div id="header">
+            <h1>Kategorien</h1>
+	</div>
+        <div id="nav">
+            <img src="img/logo.png" />
+            <a href="index.xhtml" class="section1">Dashboard</a>
+            <a class="section1" data-toggle="collapse" data-target="#adding_collapse">Erfassung</a>		
+            <div id="adding_collapse" class="collapse">
+                <a href="" class="section2">Einnahme</a>
+                <a href="" class="section2">Ausgabe</a>
+            </div> 
+            <a class="section1" data-toggle="collapse" data-target="#overview_collapse">Übersicht</a>
+            <div id="overview_collapse" class="collapse">
+                <a href="list.xhtml" class="section2">Listen</a>
+                <a href="" class="section2">Verlauf</a>
+            </div> 
+            <a href="" class="section1">Einstellungen</a>
+	</div>
+	<div id="content">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a data-toggle="pill" href="#incomeTab">Einnahmen</a></li>
+                <li><a data-toggle="pill" href="#outcomeTab">Ausgaben</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="incomeTab" class="tab-pane fade in active">
+                    <div class="selectionIntervall">
+                        <select>
+                            <option>Woche</option>
+                            <option>Monat</option>
+                            <option>Quartal</option>
+                            <option>Halbjahr</option>
+                            <option>Jahr</option>
+                        </select>
+                    </div>
+                    <div id="piechartIncome" style="width: 50%; height: 500px; margin: auto;"></div>
+                    <div id="list">
+                        <h:dataTable value="#{master.listLastTen}" var="pay" 
+                                    styleClass="table-hover table">
+                            <h:column>
+                                    <f:facet name = "header">Datum</f:facet>    				
+                                    <h:outputText value="#{pay.created}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Kategorie</f:facet>
+                                    #{pay.category.name}
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Betrag</f:facet>    				
+                                    <h:outputText value="#{pay.amount}">
+                                        <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
+                                    </h:outputText>€
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Notiz</f:facet>    				
+                                    <h:outputText value="#{pay.note}">
+                                    </h:outputText>
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Person</f:facet>    				
+                                    <h:outputText value="#{pay.person.name}">
+                                    </h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+                <div id="outcomeTab" class="tab-pane fade">
+                    <div class="selectionIntervall">
+                        <select>
+                            <option>Woche</option>
+                            <option>Monat</option>
+                            <option>Quartal</option>
+                            <option>Halbjahr</option>
+                            <option>Jahr</option>
+                        </select>
+                    </div>
+                    <div id="piechartOutcome" style="width: 50%; height: 500px; margin: auto;"></div>
+                    <div id="list">
+                        <h:dataTable value="#{master.listLastTen}" var="pay" 
+                                    styleClass="table-hover table">
+                            <h:column>
+                                    <f:facet name = "header">Datum</f:facet>    				
+                                    <h:outputText value="#{pay.created}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Kategorie</f:facet>
+                                    #{pay.category.name}
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Betrag</f:facet>    				
+                                    <h:outputText value="#{pay.amount}">
+                                        <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
+                                    </h:outputText>€
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Notiz</f:facet>    				
+                                    <h:outputText value="#{pay.note}">
+                                    </h:outputText>
+                            </h:column>
+                            <h:column>
+                                    <f:facet name = "header">Person</f:facet>    				
+                                    <h:outputText value="#{pay.person.name}">
+                                    </h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </div>
+	</div>
+	<div id="footer">
+            <p>Version: 0.1</p>
+	</div>
+    </h:body>
+</html>
+
