@@ -1,9 +1,9 @@
 .tab-content {
     position: fixed;
     top: 142px;
-    bottom:30px;
-    right:0px;
-    left:250px;
+    bottom: 30px;
+    right: 0px;
+    left: 250px;
 }
 
 #incomeTab {
@@ -19,5 +19,13 @@
 .selectionIntervall {
     margin: 20px;
     float: left;
+}
+
+#piechartIncomeWrapper, #piechartOutcomeWrapper {
+    position: relative;
+    width: 50vw;
+    height: 50vh;
+    margin: auto;
+    /*background-color: red;*/    
 }
 
