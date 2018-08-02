@@ -50,7 +50,7 @@ function drawPieIn() {
         ]
     };
     var options = {
-	responsive: true
+	responsive: false
     };
     var myPieChart = new Chart(ctx,{
         type: 'pie',
@@ -82,7 +82,7 @@ function drawPieOut() {
         ]
     };
     var options = {
-	responsive: true
+	responsive: false
     };
     var myPieChart = new Chart(ctx,{
         type: 'pie',

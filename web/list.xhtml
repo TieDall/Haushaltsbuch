@@ -61,9 +61,11 @@
                             <option>Jahr</option>
                         </select>
                     </div>
-                    <div id="piechartIncomeWrapper">
-                        <canvas id="piechartIncome"></canvas>
-                    </div>
+                    <center>
+                        <div class="chart-container">
+                            <canvas id="piechartIncome" width="500" height="270"></canvas>
+                        </div>  
+                    </center>
                     <div id="list">
                         <h:dataTable value="#{master.listLastTen}" var="pay" 
                                     styleClass="table-hover table">
@@ -106,9 +108,11 @@
                             <option>Jahr</option>
                         </select>
                     </div>
-                    <div id="piechartOutcomeWrapper">
-                        <canvas id="piechartOutcome"></canvas>
-                    </div>
+                    <center>
+                        <div class="chart-container">
+                            <canvas id="piechartOutcome" width="500" height="270"></canvas>
+                        </div>
+                    </center>
                     <div id="list">
                         <h:dataTable value="#{master.listLastTen}" var="pay" 
                                     styleClass="table-hover table">

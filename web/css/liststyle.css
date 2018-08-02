@@ -18,14 +18,9 @@
 
 .selectionIntervall {
     margin: 20px;
-    float: left;
 }
 
-#piechartIncomeWrapper, #piechartOutcomeWrapper {
-    position: relative;
-    width: 50vw;
-    height: 50vh;
-    margin: auto;
-    /*background-color: red;*/    
+.chart-container {
+    height: 300px;
 }
 
