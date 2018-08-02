@@ -22,6 +22,7 @@
         <script>
             $(document).ready(function() {
                 drawPieIn();
+                drawPieOut();
             });
         </script>
     </h:head>
@@ -105,8 +106,8 @@
                             <option>Jahr</option>
                         </select>
                     </div>
-                    <div id="piechartOutcomeWrapper" style="width: 50%; height: 500px; margin: auto;">
-                        <canvas id="piechartOutcome" width="100%" height="100%"></canvas>                        
+                    <div id="piechartOutcomeWrapper">
+                        <canvas id="piechartOutcome"></canvas>
                     </div>
                     <div id="list">
                         <h:dataTable value="#{master.listLastTen}" var="pay" 
