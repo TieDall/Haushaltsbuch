@@ -18,7 +18,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script> 
     </h:head>
-    <h:body>
+    <h:body onload="currentMonth();">
         <div id="nav">
             <img src="img/logo.png" />
             <a href="" class="section1">Dashboard</a>
@@ -39,7 +39,7 @@
 	</div>
 	<div id="content">
 		<div id="overview" class="panel panel-default">
-			<div class="panel panel-heading">aktueller Monat: Juli</div>
+                    <div class="panel panel-heading">aktueller Monat: <span id="currentMonth"></span></div>
 			<div class="panel panel-body">
                             <div class="css_bar_graph">
                                 <!-- graph -->
@@ -112,9 +112,16 @@
                                         </h:column>
                                         <h:column>
                                                 <f:facet name = "header">Betrag</f:facet>    				
-                                                <h:outputText value="#{pay.amount}">
+                                                <ui:fragment rendered="#{!pay.category.isIncome}">
+                                                <h:outputText style="color: red" value="#{pay.amount}">
                                                     <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                                </h:outputText>€
+                                                </h:outputText> <span style="color: red"> € </span>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{pay.category.isIncome}">
+                                                <h:outputText style="color: greenyellow" value="#{pay.amount}">
+                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
+                                                </h:outputText> <span style="color: yellowgreen"> € </span>
+                                                </ui:fragment>
                                         </h:column>
                                 </h:dataTable>
 			</div>
