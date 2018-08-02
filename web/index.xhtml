@@ -137,7 +137,7 @@
                         <h4 class="modal-title">Erfassung</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <h:form>
                             <fieldset> 
                                 <table width="100%">
                                     <tr>
@@ -173,7 +173,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="Betrag" name="Betrag"></input> €
+                                                    <input type="number" id="Betrag" name="Betrag" step="0.01"></input> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -220,7 +220,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="Betrag" name="Betrag"></input> €
+                                                    <input type="number" id="Betrag" name="Betrag" step="0.01"></input> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -248,7 +248,7 @@
                                     </fieldset>
                                 </div>
                             </div>
-                        </form>
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -262,9 +262,11 @@
                         <h4 class="modal-title">Kategorie erstellen</h4>
                     </div>
                     <div class="modal-body">
+                        <h:form id="Category_income">
                         Name der Kategorie für Einnahmen:
-                        <input id="Person" type="text" />
-                        <button type="button">Hinzufügen</button>
+                            <h:inputText id="category_income" binding="#{Category}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, true)}" onclick="index.xhtml" />
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -278,9 +280,11 @@
                         <h4 class="modal-title">Kategorie erstellen</h4>
                     </div>
                     <div class="modal-body">
-                        Name der Kategorie für Ausgaben:
-                        <input id="Person" type="text" />
-                        <button type="button">Hinzufügen</button>
+                        <h:form id="Category_outcome">
+                        Name der Kategorie für Einnahmen:
+                            <h:inputText id="category_outcome" binding="#{Category}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, false)}" onclick="index.xhtml" />
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -294,9 +298,11 @@
                         <h4 class="modal-title">Person hinzufügen</h4>
                     </div>
                     <div class="modal-body">
+                        <h:form id="Person">
                         Name der Person:
-                        <input id="Person" type="text" />
-                        <button type="button">Hinzufügen</button>
+                            <h:inputText id="person" binding="#{person}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addPerson(person.value)}" onclick="index.xhtml" />
+                        </h:form>
                     </div>
                 </div>
             </div>
