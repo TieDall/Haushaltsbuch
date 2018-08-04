@@ -90,3 +90,47 @@ function drawPieOut() {
         options: options
     });
 }
+
+function drawTrend() {
+    var ctx = document.getElementById("chartTrend");    
+    var options = {
+	responsive: false
+    };
+    var data = {
+        datasets: [{
+            data: [
+                {x:'März', y:-15}, 
+                {x:'April', y:-111}, 
+                {x:'Mai', y:20}, 
+                {x:'Juni', y:70}, 
+                {x:'Juli', y:2}, 
+                {x:'August', y:13},
+                {x:'September', y:13}],
+            backgroundColor: [
+                'rgb(54, 162, 235)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(54, 162, 235)',
+                'rgb(54, 162, 235)',
+            ],
+            label: "Bilanz"
+        }],
+        labels: [
+            'März',
+            'April',
+            'Mai',
+            'Juni',
+            'Juli',
+            'August',
+            'September',
+        ]
+    };
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+    });    
+}
