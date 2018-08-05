@@ -278,3 +278,20 @@ div.css_bar_graph div.graph li.bar:hover span {
 	padding: 10px;
 	margin: 0px;
 }
+
+/*
+    ============
+    media querys
+    ============
+*/
+
+@media screen and (max-width: 600px) {
+    #overview {
+        float: none;
+        width: 100%;
+        height: auto;
+    }
+    #list {
+        width: 100%;
+    }
+}

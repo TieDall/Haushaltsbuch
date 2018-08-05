@@ -73,3 +73,22 @@
 	text-align:right;	
 	font-size:20px;
 }
+
+/*
+    ============
+    media querys
+    ============
+*/
+
+@media screen and (max-width: 600px) {
+    #nav {
+        display: none;
+    }
+    #content {
+        left: 0;
+        overflow: auto;
+    }
+    #header {
+        left: 0;        
+    }
+}
