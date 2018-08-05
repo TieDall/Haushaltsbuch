@@ -35,3 +35,6 @@ CREATE TABLE IF NOT EXISTS Payments (
 ```
 ### Aufsetzen Hibernate
 Die Anwendung nutzt das Framework "Hibernate" zur Kommunikation mit einer MySQL-Datenbank. In der Konfigurationsdatei "hibernate.cfg" sind die Parameter der Datenbank einzutragen.
+## Thanks
+* [milanvrekic](https://github.com/milanvrekic/CSS3-Bar-Graphs) für die Bereitstellung von einer CSS basierten Lösung für Balkendiagramme
+* [chartjs](https://github.com/chartjs/Chart.js) für die Bereitstellung von einer JavaScript basierten Lösung für Diagramme verschiedener Art
