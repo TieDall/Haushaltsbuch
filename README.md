@@ -32,7 +32,26 @@ CREATE TABLE IF NOT EXISTS Payments (
   FOREIGN KEY (categoryID) REFERENCES Category (ID),
   FOREIGN KEY (personID) REFERENCES Person (ID)
 ); 
+
+CREATE TABLE IF NOT EXISTS `fixpayments` (
+  `ID` int(11) NOT NULL,
+  `categoryID` int(11) NOT NULL,
+  `amount` float NOT NULL,
+  `personID` int(11) NOT NULL,
+  `note` varchar(250) DEFAULT NULL,
+  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `regularityID` int(11) NOT NULL
+);
+
+CREATE IF DEFINER=`root`@`localhost` EVENT `fixPaymentsHalfYear` ON SCHEDULE EVERY 6 MONTH STARTS '2018-01-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `payments`(`categoryID`, `amount`, `personID`, `note`) SELECT categoryID, amount, personID, note FROM fixpayments WHERE regularityID=3
+
+CREATE DEFINER=`root`@`localhost` EVENT `fixPaymentsMonthly` ON SCHEDULE EVERY 1 MONTH STARTS '2018-08-01 00:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `payments`(`categoryID`, `amount`, `personID`, `note`) SELECT categoryID, amount, personID, note FROM fixpayments WHERE regularityID=1
+
+CREATE DEFINER=`root`@`localhost` EVENT `fixPaymentsQuartal` ON SCHEDULE EVERY 1 QUARTER STARTS '2018-01-01 00:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `payments`(`categoryID`, `amount`, `personID`, `note`) SELECT categoryID, amount, personID, note FROM fixpayments WHERE regularityID=2
+
+CREATE DEFINER=`root`@`localhost` EVENT `fixPaymentsYear` ON SCHEDULE EVERY 1 YEAR STARTS '2018-01-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `payments`(`categoryID`, `amount`, `personID`, `note`) SELECT categoryID, amount, personID, note FROM fixpayments WHERE regularityID=4
 ```
+
 ### Aufsetzen Hibernate
 Die Anwendung nutzt das Framework "Hibernate" zur Kommunikation mit einer MySQL-Datenbank. In der Konfigurationsdatei "hibernate.cfg" sind die Parameter der Datenbank einzutragen.
 ## Thanks
