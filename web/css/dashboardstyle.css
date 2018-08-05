@@ -293,5 +293,6 @@ div.css_bar_graph div.graph li.bar:hover span {
     }
     #list {
         width: 100%;
+        height: auto;
     }
 }
