@@ -33,5 +33,6 @@ function respNav() {
         x.className += " responsive";
     } else {
         x.className = "topnav";
+        $('.collapse').collapse("hide");
     }
 }
