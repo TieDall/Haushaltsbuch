@@ -295,4 +295,22 @@ div.css_bar_graph div.graph li.bar:hover span {
         width: 100%;
         height: auto;
     }
+    div.css_bar_graph div.graph li#income_bar {
+        left:25%;
+    }
+
+    div.css_bar_graph div.graph li#outcome_bar {
+        right:25%;
+    }
+    
+    #income_label {
+        position: relative;
+        left: 23%;
+        float: left;
+    }
+    #outcome_label {
+        position: relative;
+        float: right;
+        right: 24%;
+    }
 }
