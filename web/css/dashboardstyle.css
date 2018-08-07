@@ -278,3 +278,39 @@ div.css_bar_graph div.graph li.bar:hover span {
 	padding: 10px;
 	margin: 0px;
 }
+
+/*
+    ============
+    media querys
+    ============
+*/
+
+@media screen and (max-width: 600px) {
+    #overview {
+        float: none;
+        width: 100%;
+        height: auto;
+    }
+    #list {
+        width: 100%;
+        height: auto;
+    }
+    div.css_bar_graph div.graph li#income_bar {
+        left:25%;
+    }
+
+    div.css_bar_graph div.graph li#outcome_bar {
+        right:25%;
+    }
+    
+    #income_label {
+        position: relative;
+        left: 23%;
+        float: left;
+    }
+    #outcome_label {
+        position: relative;
+        float: right;
+        right: 24%;
+    }
+}

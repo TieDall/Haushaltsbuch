@@ -25,6 +25,16 @@ function outcome(outcome, income) {
     var y = document.getElementById(income);
     x.style.display = "block"; 
     y.style.display = "none";
+} 
+
+function respNav() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+        $('.collapse').collapse("hide");
+    }
 }
 
 function drawPieIn() {
@@ -139,7 +149,6 @@ function currentMonth() {
     var months    = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
     var now       = new Date();
     var thisMonth = months[now.getMonth()]; // getMonth method returns the month of the date (0-January :: 11-December)
-    console.log(thisMonth);
     var htmlComp = document.getElementById("currentMonth");
     htmlComp.innerHTML = thisMonth;
 }
