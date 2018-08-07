@@ -131,10 +131,36 @@ public class Master {
             bufferOutMonthData = bufferOutMonthData + "'" + value + "',";
             bufferOutMonthLabel = bufferOutMonthLabel + "'" + key + "',";
         }
+        int inNumberItems = payInMonthCat.size();
+        int outNumberItems = payOutMonthCat.size();
+        String color1 = "'rgb(54, 162, 235)',";
+        String color2 = "'rgb(255, 159, 64)',";
+        String color3 = "'rgb(255, 205, 86)',";
+        int numberCol = 1;
+        for (int i = 0; i < inNumberItems; i++) {
+            if (numberCol == 4) {
+                numberCol = 1;
+            }
+            
+            if (i == inNumberItems-1 && numberCol != 3) {
+                bufferInMonthColor = bufferInMonthColor + color2;
+            } else {
+                if (numberCol == 1) {
+                    bufferInMonthColor = bufferInMonthColor + color1;
+                } else if (numberCol == 2) {
+                    bufferInMonthColor = bufferInMonthColor + color2;
+                } else if (numberCol == 3) {
+                    bufferInMonthColor = bufferInMonthColor + color3;
+                }
+            }
+            
+            numberCol++;
+        }
         // store in local var
         this.inMonthList = payInMonth;
         this.inMonthData = bufferInMonthData;
         this.inMonthLabel = bufferInMonthLabel;
+        this.inMonthColor = bufferInMonthColor;
         this.outMonthList = payOutMonth;
         this.outMonthData = bufferOutMonthData;
         this.outMonthLabel = bufferOutMonthLabel;
