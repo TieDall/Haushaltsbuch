@@ -44,4 +44,5 @@ Contributor(s):
   <table-filter match-name="person"/>
   <table-filter match-name="payments"/>
   <table-filter match-name="category"/>
+  <table-filter match-name="fixpayments"/>
 </hibernate-reverse-engineering>
