@@ -39,7 +39,6 @@ public class Master {
     public Master() {        
         
         this.payments = new ArrayList<>();
-        
         this.updateData();
         
     }
@@ -75,12 +74,49 @@ public class Master {
         this.categoriesOutcome = bufferOutcome.subList(0, bufferOutcome.size());
         session.getTransaction().commit();
     }
+    
+    public void addCategory(String name, boolean IsIncome){
+        
+        this.connectToDB();
+        
+        
+        Category c = new Category();
+        c.setIsDeleted(false);
+        c.setIsIncome(IsIncome);
+        c.setName(name);
+        
+        session.beginTransaction();
+        session.persist(c);
+        session.getTransaction().commit();
+        
+        this.disconnectFromDB();
+     
+        this.updateData();
+    }
+
+    public void addPerson(String name){
+        
+        this.connectToDB();
+        
+        
+        Person p = new Person();
+        p.setName(name);
+        
+        session.beginTransaction();
+        session.persist(p);
+        session.getTransaction().commit();
+        
+        this.disconnectFromDB();
+     
+        this.updateData();
+    }
 
     /**
      * Updates data for visualisation.
      */
     private void updateData() {
-        this.connectToDB();
+        System.out.println("Start");
+        this.connectToDB();       
         this.updateDashboardOverview();
         this.updateDashboardList();
         this.loadPersons();
@@ -273,7 +309,5 @@ public class Master {
     public void setPerson(List<Person> person) {
         this.person = person;
     }
-    
-    
-    
+   
 }
