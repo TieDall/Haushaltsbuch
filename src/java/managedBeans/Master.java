@@ -3,7 +3,9 @@ package managedBeans;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import model.Category;
@@ -36,10 +38,77 @@ public class Master {
     List<Category> categoriesOutcome;
     List<Person> person;
     
+    // data overview list
+    String inMonthData = "100,100,100";
+    String inMonthColor = ""; //'rgb(54, 162, 235)','rgb(255, 159, 64)','rgb(255, 205, 86)'
+    String inMonthLabel = "'Gehalt','Sozialleistung','Geschenk'";
+    ArrayList<Payments> inMonthList = new ArrayList<>();
+    
     public Master() {        
         
         this.payments = new ArrayList<>();
         this.updateData();
+        
+    }
+    
+    /**
+     * Loads data which is needed for overview pages.
+     */
+    private void loadOverviewData() {        
+        // seperate in income and outcome
+        ArrayList<Payments> payIn = new ArrayList<>();
+        ArrayList<Payments> payOut = new ArrayList<>();
+        for (Payments payment : payments) {
+            if (payment.getCategory().isIsIncome()){
+                payIn.add(payment);
+            } else {
+                payOut.add(payment);
+            }
+        }
+        
+        // month
+        // seperate current month
+        ArrayList<Payments> payInMonth = new ArrayList<>();
+        ArrayList<Payments> payOutMonth = new ArrayList<>();
+        Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+        for (Payments payments : payIn) {
+            if (payments.getCreated().getMonth() == currentTimestamp.getMonth()){
+                payInMonth.add(payments);
+            }
+        }
+        for (Payments payments : payOut) {
+            if (payments.getCreated().getMonth() == currentTimestamp.getMonth()){
+                payOutMonth.add(payments);
+            }
+        }
+        // seperate in categories
+        HashMap<String,Float> payInMonthCat = new HashMap<String, Float>();
+        for (Payments payments : payInMonth) {
+            boolean added = false;
+            for (Map.Entry<String, Float> entry : payInMonthCat.entrySet()) {
+                if (entry.getKey().equals(payments.getCategory().getName())) {
+                    entry.setValue(entry.getValue() + payments.getAmount());
+                    added = true;
+                }
+            }
+            if (!added) {
+                payInMonthCat.put(payments.getCategory().getName(), payments.getAmount());
+            }
+        }
+        // create var
+        String bufferInMonthData = "";
+        String bufferInMonthColor = "";
+        String bufferInMonthLabel = "";
+        for (Map.Entry<String, Float> entry : payInMonthCat.entrySet()) {
+            String key = entry.getKey();
+            Float value = entry.getValue();
+            bufferInMonthData = bufferInMonthData + "'" + value + "',";
+            bufferInMonthLabel = bufferInMonthLabel + "'" + key + "',";
+        }
+        
+        this.inMonthList = payInMonth;
+        this.inMonthData = bufferInMonthData;
+        this.inMonthLabel = bufferInMonthLabel;
         
     }
     
@@ -121,6 +190,7 @@ public class Master {
         this.updateDashboardList();
         this.loadPersons();
         this.loadCategories();
+        this.loadOverviewData();
         this.disconnectFromDB();
     }
     
@@ -309,5 +379,39 @@ public class Master {
     public void setPerson(List<Person> person) {
         this.person = person;
     }
+
+    public String getInMonthData() {
+        return inMonthData;
+    }
+
+    public void setInMonthData(String inMonthData) {
+        this.inMonthData = inMonthData;
+    }
+
+    public String getInMonthColor() {
+        return inMonthColor;
+    }
+
+    public void setInMonthColor(String inMonthColor) {
+        this.inMonthColor = inMonthColor;
+    }
+
+    public String getInMonthLabel() {
+        return inMonthLabel;
+    }
+
+    public void setInMonthLabel(String inMonthLabel) {
+        this.inMonthLabel = inMonthLabel;
+    }
+
+    public ArrayList<Payments> getInMonthList() {
+        return inMonthList;
+    }
+
+    public void setInMonthList(ArrayList<Payments> inMonthList) {
+        this.inMonthList = inMonthList;
+    }
+    
+    
    
 }

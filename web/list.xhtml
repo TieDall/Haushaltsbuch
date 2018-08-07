@@ -20,6 +20,25 @@
         <script src="js/Chart.js"></script> 
         
         <script>
+            function drawPieIn() {
+                var ctx = document.getElementById("piechartIncome");
+                var data = {
+                    datasets: [{
+                        data: [#{master.inMonthData}],
+                        backgroundColor: [#{master.inMonthColor}],
+                        label: "Einnahmen"
+                    }],
+                    labels: [#{master.inMonthLabel}]
+                };
+                var options = {
+                    responsive: false
+                };
+                var myPieChart = new Chart(ctx,{
+                    type: 'pie',
+                    data: data,
+                    options: options
+                });
+            }
             $(document).ready(function() {
                 drawPieIn();
                 drawPieOut();
@@ -55,7 +74,7 @@
                     <div class="selectionIntervall">
                         <select>
                             <option>Woche</option>
-                            <option>Monat</option>
+                            <option selected="true">Monat</option>
                             <option>Quartal</option>
                             <option>Halbjahr</option>
                             <option>Jahr</option>
@@ -67,7 +86,7 @@
                         </div>  
                     </center>
                     <div id="list">
-                        <h:dataTable value="#{master.listLastTen}" var="pay" 
+                        <h:dataTable value="#{master.inMonthList}" var="pay" 
                                     styleClass="table-hover table">
                             <h:column>
                                     <f:facet name = "header">Datum</f:facet>    				
