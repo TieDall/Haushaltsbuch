@@ -45,8 +45,9 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/haushaltsbuch?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password"/>
+    <mapping resource="model/Fixpayments.hbm.xml"/>
     <mapping resource="model/Category.hbm.xml"/>
-    <mapping resource="model/Payments.hbm.xml"/>
     <mapping resource="model/Person.hbm.xml"/>
+    <mapping resource="model/Payments.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

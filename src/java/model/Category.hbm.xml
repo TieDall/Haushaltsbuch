@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27.07.2018 23:57:36 by Hibernate Tools 4.3.1 -->
+<!-- Generated 07.08.2018 10:24:18 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.Category" table="category" catalog="haushaltsbuch" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -17,6 +17,12 @@
         <property name="isDeleted" type="boolean">
             <column name="is_deleted" not-null="true" />
         </property>
+        <set name="fixpaymentses" table="fixpayments" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="categoryID" not-null="true" />
+            </key>
+            <one-to-many class="model.Fixpayments" />
+        </set>
         <set name="paymentses" table="payments" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="categoryID" not-null="true" />
