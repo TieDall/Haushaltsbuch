@@ -37,38 +37,6 @@ function respNav() {
     }
 }
 
-function drawPieOut() {
-    var ctx = document.getElementById("piechartOutcome");
-    var data = {
-        datasets: [{
-            data: [
-                151.2, 
-                400, 
-                52.30,
-            ],
-            backgroundColor: [
-                'rgb(54, 162, 235)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-            ],
-            label: "Ausgaben"
-        }],
-        labels: [
-            'Lebensmittel',
-            'Miete',
-            'Bahn',
-        ]
-    };
-    var options = {
-	responsive: false
-    };
-    var myPieChart = new Chart(ctx,{
-        type: 'pie',
-        data: data,
-        options: options
-    });
-}
-
 function drawTrend() {
     var ctx = document.getElementById("chartTrend");    
     var options = {

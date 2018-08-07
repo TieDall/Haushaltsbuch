@@ -39,10 +39,14 @@ public class Master {
     List<Person> person;
     
     // data overview list
-    String inMonthData = "100,100,100";
+    String inMonthData = "";
     String inMonthColor = ""; //'rgb(54, 162, 235)','rgb(255, 159, 64)','rgb(255, 205, 86)'
-    String inMonthLabel = "'Gehalt','Sozialleistung','Geschenk'";
+    String inMonthLabel = "";
     ArrayList<Payments> inMonthList = new ArrayList<>();
+    String outMonthData = "";
+    String outMonthColor = ""; //'rgb(54, 162, 235)','rgb(255, 159, 64)','rgb(255, 205, 86)'
+    String outMonthLabel = "";
+    ArrayList<Payments> outMonthList = new ArrayList<>();
     
     public Master() {        
         
@@ -83,6 +87,7 @@ public class Master {
         }
         // seperate in categories
         HashMap<String,Float> payInMonthCat = new HashMap<String, Float>();
+        HashMap<String,Float> payOutMonthCat = new HashMap<String, Float>();
         for (Payments payments : payInMonth) {
             boolean added = false;
             for (Map.Entry<String, Float> entry : payInMonthCat.entrySet()) {
@@ -95,20 +100,44 @@ public class Master {
                 payInMonthCat.put(payments.getCategory().getName(), payments.getAmount());
             }
         }
+        for (Payments payments : payOutMonth) {
+            boolean added = false;
+            for (Map.Entry<String, Float> entry : payOutMonthCat.entrySet()) {
+                if (entry.getKey().equals(payments.getCategory().getName())) {
+                    entry.setValue(entry.getValue() + payments.getAmount());
+                    added = true;
+                }
+            }
+            if (!added) {
+                payOutMonthCat.put(payments.getCategory().getName(), payments.getAmount());
+            }
+        }
         // create var
         String bufferInMonthData = "";
         String bufferInMonthColor = "";
         String bufferInMonthLabel = "";
+        String bufferOutMonthData = "";
+        String bufferOutMonthColor = "";
+        String bufferOutMonthLabel = "";
         for (Map.Entry<String, Float> entry : payInMonthCat.entrySet()) {
             String key = entry.getKey();
             Float value = entry.getValue();
             bufferInMonthData = bufferInMonthData + "'" + value + "',";
             bufferInMonthLabel = bufferInMonthLabel + "'" + key + "',";
         }
-        
+        for (Map.Entry<String, Float> entry : payOutMonthCat.entrySet()) {
+            String key = entry.getKey();
+            Float value = entry.getValue();
+            bufferOutMonthData = bufferOutMonthData + "'" + value + "',";
+            bufferOutMonthLabel = bufferOutMonthLabel + "'" + key + "',";
+        }
+        // store in local var
         this.inMonthList = payInMonth;
         this.inMonthData = bufferInMonthData;
         this.inMonthLabel = bufferInMonthLabel;
+        this.outMonthList = payOutMonth;
+        this.outMonthData = bufferOutMonthData;
+        this.outMonthLabel = bufferOutMonthLabel;
         
     }
     
@@ -410,6 +439,38 @@ public class Master {
 
     public void setInMonthList(ArrayList<Payments> inMonthList) {
         this.inMonthList = inMonthList;
+    }
+
+    public String getOutMonthData() {
+        return outMonthData;
+    }
+
+    public void setOutMonthData(String outMonthData) {
+        this.outMonthData = outMonthData;
+    }
+
+    public String getOutMonthColor() {
+        return outMonthColor;
+    }
+
+    public void setOutMonthColor(String outMonthColor) {
+        this.outMonthColor = outMonthColor;
+    }
+
+    public String getOutMonthLabel() {
+        return outMonthLabel;
+    }
+
+    public void setOutMonthLabel(String outMonthLabel) {
+        this.outMonthLabel = outMonthLabel;
+    }
+
+    public ArrayList<Payments> getOutMonthList() {
+        return outMonthList;
+    }
+
+    public void setOutMonthList(ArrayList<Payments> outMonthList) {
+        this.outMonthList = outMonthList;
     }
     
     
