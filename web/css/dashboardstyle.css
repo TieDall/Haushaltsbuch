@@ -1,7 +1,6 @@
 #overview {
 	float:left;
 	width:50%;
-	/* background-color:yellow; */
 	height:100%;
 }
 
@@ -24,17 +23,18 @@
     margin: 25px;
     font-size: 20px;
     text-align: center;
-    text-decoration: underline;
 }
 
-#bilanz_number {
+#bilanz_positiv {
     font-weight: bold;
-    
     color: #608d00;	/* --- IE --- */
     color: rgba(96,141,0,0.8);
-    /* ODER */
-/*    color: #d23648;	 --- IE --- 
-    color: rgba(210,54,72,0.8);*/
+}
+
+#bilanz_negativ {
+    font-weight: bold;
+    color: #d23648;	/* --- IE --- */
+    color: rgba(210,54,72,0.8);
 }
 
 #list {
@@ -277,4 +277,40 @@ div.css_bar_graph div.graph li.bar:hover span {
 	top: -60px;
 	padding: 10px;
 	margin: 0px;
+}
+
+/*
+    ============
+    media querys
+    ============
+*/
+
+@media screen and (max-width: 600px) {
+    #overview {
+        float: none;
+        width: 100%;
+        height: auto;
+    }
+    #list {
+        width: 100%;
+        height: auto;
+    }
+    div.css_bar_graph div.graph li#income_bar {
+        left:25%;
+    }
+
+    div.css_bar_graph div.graph li#outcome_bar {
+        right:25%;
+    }
+    
+    #income_label {
+        position: relative;
+        left: 23%;
+        float: left;
+    }
+    #outcome_label {
+        position: relative;
+        float: right;
+        right: 24%;
+    }
 }
