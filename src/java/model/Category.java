@@ -1,7 +1,6 @@
 package model;
 // Generated 07.08.2018 10:24:17 by Hibernate Tools 4.3.1
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +19,6 @@ public class Category  implements java.io.Serializable {
 
     public Category() {
     }
-
 	
     public Category(String name, boolean isIncome, boolean isDeleted) {
         this.name = name;
@@ -77,10 +75,7 @@ public class Category  implements java.io.Serializable {
     public void setPaymentses(Set paymentses) {
         this.paymentses = paymentses;
     }
-
-
-
-
+    
 }
 
 

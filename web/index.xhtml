@@ -17,11 +17,30 @@
         <link rel="stylesheet" href="css/bootstrap.min.css" />
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script> 
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
     </h:head>
     <h:body onload="currentMonth();">
+        <div class="topnav" id="myTopnav">
+            <a href="" class="active">Dashboard</a>
+            <a class="section1" data-toggle="collapse" data-target="#adding_collapse_mobile">Erfassung</a>		
+            <div id="adding_collapse_mobile" class="collapse">
+                <a href="" class="section2">- Einnahme</a>
+                <a href="" class="section2">- Ausgabe</a>
+            </div> 
+            <a class="section1" data-toggle="collapse" data-target="#overview_collapse_mobile">Übersicht</a>
+            <div id="overview_collapse_mobile" class="collapse">
+                <a href="" class="section2">- Listen</a>
+                <a href="" class="section2">- Verlauf</a>
+            </div> 
+            <a href="" class="section1">Einstellungen</a>
+            <a href="javascript:void(0);" class="icon" onclick="respNav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <div id="nav">
             <img src="img/logo.png" />
-            <a href="" class="section1">Dashboard</a>
+            <a href="index.xhtml" class="section1">Dashboard</a>
             <a class="section1" data-toggle="collapse" data-target="#adding_collapse">Erfassung</a>		
             <div id="adding_collapse" class="collapse">
                 <a href="" class="section2">Einnahme</a>
@@ -29,10 +48,10 @@
             </div> 
             <a class="section1" data-toggle="collapse" data-target="#overview_collapse">Übersicht</a>
             <div id="overview_collapse" class="collapse">
-                <a href="" class="section2">Listen</a>
-                <a href="" class="section2">Verlauf</a>
+                <a href="list.xhtml" class="section2">Listen</a>
+                <a href="trend.xhtml" class="section2">Verlauf</a>
             </div>
-            <a href="" class="section1" data-toggle="modal" data-target="#fixpaymentsModal">Fixe Zahlungen</a>
+            <a href="" class="section1" data-toggle="modal" data-target="#fixpaymentsModal" onclick="modal('fixpayments', 'fixincome', 'fixoutcome');" >Fixe Zahlungen</a>
             <a href="" class="section1">Einstellungen</a>
 	</div>
 	<div id="header">
@@ -98,7 +117,7 @@
 			</div>
 			<div class="table-responsive panel-body">
                                 
-                            <button style="width:100%" type="button" onclick="modal()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
+                            <button style="width:100%" type="button" onclick="modal('payments', 'income', 'outcome')" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
 				<h:dataTable value="#{master.listLastTen}" var="pay" 
                                                 styleClass="table-hover table">
                                         <h:column>
@@ -119,7 +138,7 @@
                                                 </h:outputText> <span style="color: red"> € </span>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{pay.category.isIncome}">
-                                                <h:outputText style="color: greenyellow" value="#{pay.amount}">
+                                                <h:outputText style="color: yellowgreen" value="#{pay.amount}">
                                                     <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
                                                 </h:outputText> <span style="color: yellowgreen"> € </span>
                                                 </ui:fragment>
@@ -145,16 +164,16 @@
                         <h4 class="modal-title">Erfassung</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <h:form>
                             <fieldset> 
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <input type="radio" onclick="income()" id="in" value="income" name="payments" checked="checked"/> 
+                                            <input type="radio" onclick="income('income', 'outcome')" id="in" value="income" name="payments" checked="checked"/> 
                                             <label for="in">Einnahme</label>
                                         </td>
                                         <td>
-                                            <input type="radio" onclick="outcome()" id="out" value="outcome" name="payments" /> 
+                                            <input type="radio" onclick="outcome('outcome', 'income')" id="out" value="outcome" name="payments" /> 
                                             <label for="out">Ausgabe</label>
                                         </td>
                                     </tr>
@@ -181,7 +200,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="Betrag" name="Betrag"></input> €
+                                                    <input type="number" id="Betrag" name="Betrag" step="0.01"></input> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -228,7 +247,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="Betrag" name="Betrag"></input> €
+                                                    <input type="number" id="Betrag" name="Betrag" step="0.01"></input> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -256,7 +275,7 @@
                                     </fieldset>
                                 </div>
                             </div>
-                        </form>
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -270,9 +289,11 @@
                         <h4 class="modal-title">Kategorie erstellen</h4>
                     </div>
                     <div class="modal-body">
+                        <h:form id="Category_income">
                         Name der Kategorie für Einnahmen:
-                        <input id="Person" type="text" />
-                        <button type="button">Hinzufügen</button>
+                            <h:inputText id="category_income" binding="#{Category}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, true)}" onclick="index.xhtml" />
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -286,9 +307,11 @@
                         <h4 class="modal-title">Kategorie erstellen</h4>
                     </div>
                     <div class="modal-body">
-                        Name der Kategorie für Ausgaben:
-                        <input id="Person" type="text" />
-                        <button type="button">Hinzufügen</button>
+                        <h:form id="Category_outcome">
+                        Name der Kategorie für Einnahmen:
+                            <h:inputText id="category_outcome" binding="#{Category}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, false)}" onclick="index.xhtml" />
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -302,9 +325,11 @@
                         <h4 class="modal-title">Person hinzufügen</h4>
                     </div>
                     <div class="modal-body">
+                        <h:form id="Person">
                         Name der Person:
-                        <input id="Person" type="text" />
-                        <button type="button">Hinzufügen</button>
+                            <h:inputText id="person" binding="#{person}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addPerson(person.value)}" onclick="index.xhtml" />
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -324,18 +349,18 @@
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <input type="radio" onclick="income()" id="in" value="income" name="payments" checked="checked"/> 
+                                            <input type="radio" onclick="income('fixincome', 'fixoutcome')" id="in" value="fixincome" name="fixpayments" checked="checked"/> 
                                             <label for="in">Einnahme</label>
                                         </td>
                                         <td>
-                                            <input type="radio" onclick="outcome()" id="out" value="outcome" name="payments" /> 
+                                            <input type="radio" onclick="outcome('fixoutcome', 'fixincome')" id="out" value="fixoutcome" name="fixpayments" /> 
                                             <label for="out">Ausgabe</label>
                                         </td>
                                     </tr>
                                 </table>
                             </fieldset>
                             <div>
-                                <div id="income">
+                                <div id="fixincome">
                                     <fieldset> 
                                         <table width="100%">
                                             <tr>
@@ -395,7 +420,7 @@
                                         </table>
                                     </fieldset>
                                 </div>
-                                <div id="outcome">
+                                <div id="fixoutcome">
                                     <fieldset> 
                                         <table width="100%">
                                             <tr>

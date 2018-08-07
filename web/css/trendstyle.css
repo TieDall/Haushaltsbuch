@@ -1,0 +1,16 @@
+#additionalInfo {
+    margin: 20px;
+}
+
+#additionalInfo td {
+    padding-left: 20px;
+}
+
+.selectionIntervall {
+    float: left;
+    margin: 20px;
+}
+
+.chart-container {
+    margin: 40px;
+}
