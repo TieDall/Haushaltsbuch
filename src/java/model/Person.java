@@ -1,5 +1,5 @@
 package model;
-// Generated 27.07.2018 23:57:36 by Hibernate Tools 4.3.1
+// Generated 07.08.2018 10:24:17 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,6 +14,7 @@ public class Person  implements java.io.Serializable {
      private Integer id;
      private String name;
      private boolean isDeleted;
+     private Set fixpaymentses = new HashSet(0);
      private Set paymentses = new HashSet(0);
 
     public Person() {
@@ -24,9 +25,10 @@ public class Person  implements java.io.Serializable {
         this.name = name;
         this.isDeleted = isDeleted;
     }
-    public Person(String name, boolean isDeleted, Set paymentses) {
+    public Person(String name, boolean isDeleted, Set fixpaymentses, Set paymentses) {
        this.name = name;
        this.isDeleted = isDeleted;
+       this.fixpaymentses = fixpaymentses;
        this.paymentses = paymentses;
     }
    
@@ -50,6 +52,13 @@ public class Person  implements java.io.Serializable {
     
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+    public Set getFixpaymentses() {
+        return this.fixpaymentses;
+    }
+    
+    public void setFixpaymentses(Set fixpaymentses) {
+        this.fixpaymentses = fixpaymentses;
     }
     public Set getPaymentses() {
         return this.paymentses;
