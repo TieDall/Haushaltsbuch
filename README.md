@@ -57,3 +57,4 @@ Die Anwendung nutzt das Framework "Hibernate" zur Kommunikation mit einer MySQL-
 ## Thanks
 * [milanvrekic](https://github.com/milanvrekic/CSS3-Bar-Graphs) für die Bereitstellung von einer CSS basierten Lösung für Balkendiagramme
 * [chartjs](https://github.com/chartjs/Chart.js) für die Bereitstellung von einer JavaScript basierten Lösung für Diagramme verschiedener Art
+* [Alicia Kruckow](http://aliciakruckow.com/) für das Designen des Logos
