@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F9B000;}
+	.st1{clip-path:url(#SVGID_2_);}
+	.st2{fill:#F5F5F5;}
+</style>
+<circle class="st0" cx="100" cy="100" r="99.9"/>
+<g>
+	<defs>
+		<circle id="SVGID_1_" cx="100" cy="100" r="99.9"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st1">
+		<polygon class="st2" points="49.5,169 -5.1,169 -5.1,155 35.4,155 35.4,95 98.2,32.6 153.7,87.9 172.8,67.2 183.2,76.7 
+			154.1,108.1 98.2,52.5 49.5,100.8 		"/>
+	</g>
+</g>
+<g>
+	<polygon class="st2" points="186.2,65 186.3,90.1 161,64.9 	"/>
+</g>
+</svg>
