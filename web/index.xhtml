@@ -32,7 +32,7 @@
                 <a href="list.xhtml" class="section2">Listen</a>
                 <a href="trend.xhtml" class="section2">Verlauf</a>
             </div>
-            <a href="" class="section1" data-toggle="modal" data-target="#fixpaymentsModal">Fixe Zahlungen</a>
+            <a href="" class="section1" data-toggle="modal" data-target="#fixpaymentsModal" onclick="modal('fixpayments', 'fixincome', 'fixoutcome');" >Fixe Zahlungen</a>
             <a href="" class="section1">Einstellungen</a>
 	</div>
 	<div id="header">
@@ -98,7 +98,7 @@
 			</div>
 			<div class="table-responsive panel-body">
                                 
-                            <button style="width:100%" type="button" onclick="modal()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
+                            <button style="width:100%" type="button" onclick="modal('payments', 'income', 'outcome')" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
 				<h:dataTable value="#{master.listLastTen}" var="pay" 
                                                 styleClass="table-hover table">
                                         <h:column>
@@ -119,7 +119,7 @@
                                                 </h:outputText> <span style="color: red"> € </span>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{pay.category.isIncome}">
-                                                <h:outputText style="color: greenyellow" value="#{pay.amount}">
+                                                <h:outputText style="color: yellowgreen" value="#{pay.amount}">
                                                     <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
                                                 </h:outputText> <span style="color: yellowgreen"> € </span>
                                                 </ui:fragment>
@@ -150,11 +150,11 @@
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <input type="radio" onclick="income()" id="in" value="income" name="payments" checked="checked"/> 
+                                            <input type="radio" onclick="income('income', 'outcome')" id="in" value="income" name="payments" checked="checked"/> 
                                             <label for="in">Einnahme</label>
                                         </td>
                                         <td>
-                                            <input type="radio" onclick="outcome()" id="out" value="outcome" name="payments" /> 
+                                            <input type="radio" onclick="outcome('outcome', 'income')" id="out" value="outcome" name="payments" /> 
                                             <label for="out">Ausgabe</label>
                                         </td>
                                     </tr>
@@ -330,18 +330,18 @@
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <input type="radio" onclick="income()" id="in" value="income" name="payments" checked="checked"/> 
+                                            <input type="radio" onclick="income('fixincome', 'fixoutcome')" id="in" value="fixincome" name="fixpayments" checked="checked"/> 
                                             <label for="in">Einnahme</label>
                                         </td>
                                         <td>
-                                            <input type="radio" onclick="outcome()" id="out" value="outcome" name="payments" /> 
+                                            <input type="radio" onclick="outcome('fixoutcome', 'fixincome')" id="out" value="fixoutcome" name="fixpayments" /> 
                                             <label for="out">Ausgabe</label>
                                         </td>
                                     </tr>
                                 </table>
                             </fieldset>
                             <div>
-                                <div id="income">
+                                <div id="fixincome">
                                     <fieldset> 
                                         <table width="100%">
                                             <tr>
@@ -388,7 +388,7 @@
                                         </table>
                                     </fieldset>
                                 </div>
-                                <div id="outcome">
+                                <div id="fixoutcome">
                                     <fieldset> 
                                         <table width="100%">
                                             <tr>
