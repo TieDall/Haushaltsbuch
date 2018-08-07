@@ -136,25 +136,41 @@ public class Master {
         String color1 = "'rgb(54, 162, 235)',";
         String color2 = "'rgb(255, 159, 64)',";
         String color3 = "'rgb(255, 205, 86)',";
-        int numberCol = 1;
+        int inNumberCol = 1;
         for (int i = 0; i < inNumberItems; i++) {
-            if (numberCol == 4) {
-                numberCol = 1;
-            }
-            
-            if (i == inNumberItems-1 && numberCol != 3) {
+            if (inNumberCol == 4) {
+                inNumberCol = 1;
+            }            
+            if (i == inNumberItems-1 && inNumberCol != 3) {
                 bufferInMonthColor = bufferInMonthColor + color2;
             } else {
-                if (numberCol == 1) {
+                if (inNumberCol == 1) {
                     bufferInMonthColor = bufferInMonthColor + color1;
-                } else if (numberCol == 2) {
+                } else if (inNumberCol == 2) {
                     bufferInMonthColor = bufferInMonthColor + color2;
-                } else if (numberCol == 3) {
+                } else if (inNumberCol == 3) {
                     bufferInMonthColor = bufferInMonthColor + color3;
                 }
             }
-            
-            numberCol++;
+            inNumberCol++;
+        }
+        int outNumberCol = 1;
+        for (int i = 0; i < outNumberItems; i++) {
+            if (outNumberCol == 4) {
+                outNumberCol = 1;
+            }            
+            if (i == outNumberItems-1 && outNumberCol != 3) {
+                bufferOutMonthColor = bufferOutMonthColor + color2;
+            } else {
+                if (outNumberCol == 1) {
+                    bufferOutMonthColor = bufferOutMonthColor + color1;
+                } else if (outNumberCol == 2) {
+                    bufferOutMonthColor = bufferOutMonthColor + color2;
+                } else if (outNumberCol == 3) {
+                    bufferOutMonthColor = bufferOutMonthColor + color3;
+                }
+            }
+            outNumberCol++;
         }
         // store in local var
         this.inMonthList = payInMonth;
@@ -164,6 +180,7 @@ public class Master {
         this.outMonthList = payOutMonth;
         this.outMonthData = bufferOutMonthData;
         this.outMonthLabel = bufferOutMonthLabel;
+        this.outMonthColor = bufferOutMonthColor;
         
     }
     
