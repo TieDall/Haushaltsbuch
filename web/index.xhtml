@@ -22,7 +22,7 @@
     </h:head>
     <h:body onload="currentMonth();">
         <div class="topnav" id="myTopnav">
-            <a href="" class="active">Dashboard</a>
+            <a href="index.xhtml" class="active">Dashboard</a>
             <a class="section1" data-toggle="collapse" data-target="#adding_collapse_mobile">Erfassung</a>		
             <div id="adding_collapse_mobile" class="collapse">
                 <a href="" class="section2">- Einnahme</a>
@@ -30,10 +30,11 @@
             </div> 
             <a class="section1" data-toggle="collapse" data-target="#overview_collapse_mobile">Übersicht</a>
             <div id="overview_collapse_mobile" class="collapse">
-                <a href="" class="section2">- Listen</a>
-                <a href="" class="section2">- Verlauf</a>
+                <a href="list.xhtml" class="section2">- Listen</a>
+                <a href="trend.xhtml" class="section2">- Verlauf</a>
             </div> 
-            <a href="" class="section1">Einstellungen</a>
+            <a href="" class="section1" data-toggle="modal" data-target="#fixpaymentsModal" onclick="modal('fixpayments', 'fixincome', 'fixoutcome');" >Fixe Zahlungen</a>
+            <a href="export.xhtml" class="section1">Export</a>
             <a href="javascript:void(0);" class="icon" onclick="respNav()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -52,7 +53,7 @@
                 <a href="trend.xhtml" class="section2">Verlauf</a>
             </div>
             <a href="" class="section1" data-toggle="modal" data-target="#fixpaymentsModal" onclick="modal('fixpayments', 'fixincome', 'fixoutcome');" >Fixe Zahlungen</a>
-            <a href="" class="section1">Einstellungen</a>
+            <a href="export.xhtml" class="section1">Export</a>
 	</div>
 	<div id="header">
             <h1>Haushaltsbuch</h1>
