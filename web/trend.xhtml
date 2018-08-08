@@ -20,6 +20,25 @@
         <script src="js/Chart.js"></script> 
         
         <script>
+            function drawTrend() {
+                var ctx = document.getElementById("chartTrend");    
+                var options = {
+                    responsive: false
+                };
+                var data = {
+                    datasets: [{
+                        data: [#{master.trendHalfyearData}],
+                        backgroundColor: [#{master.trendHalfyearColor}],
+                        label: "Bilanz"
+                    }],
+                    labels: [#{master.trendHalfyearLabels}]
+                };
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: options
+                });    
+            }
             $(document).ready(function() {
                 drawTrend();
             });
@@ -52,24 +71,24 @@
             </center>
             <div class="selectionIntervall">
                 <select>
-                    <option>Halbjahr</option>
-                    <option>Jahr</option>
-                    <option>5 Jahre</option>
+                    <option selected="true">Halbjahr</option>
+                    <option disabled="true">Jahr</option>
+                    <option disabled="true">5 Jahre</option>
                 </select>
             </div>
             <div id="additionalInfo">
                 <table>
                     <tr>
                         <td>Einnahmen:</td>
-                        <td>1020€</td>
+                        <td>#{master.trendHalfyearIncome}€</td>
                     </tr>
                     <tr>
                         <td>Ausgaben:</td>
-                        <td>1000€</td>
+                        <td>#{master.trendHalfyearOutcome}€</td>
                     </tr>
                     <tr>
                         <td>Bilanz:</td>
-                        <td>20</td>
+                        <td>#{master.trendHalfyearBalance}€</td>
                     </tr>
                 </table>
             </div>
