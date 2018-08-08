@@ -20,7 +20,7 @@
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
     </h:head>
-    <h:body onload="currentMonth();">
+    <h:body>
         <div class="topnav" id="myTopnav">
             <a href="index.xhtml" class="active">Dashboard</a>
             <a class="section1" data-toggle="collapse" data-target="#adding_collapse_mobile">Erfassung</a>		
@@ -44,8 +44,8 @@
             <a href="index.xhtml" class="section1">Dashboard</a>
             <a class="section1" data-toggle="collapse" data-target="#adding_collapse">Erfassung</a>		
             <div id="adding_collapse" class="collapse">
-                <a href="" class="section2" data-toggle="modal" data-target="#addingModal" onclick="dashboard('income', 'outcome');">Einnahme</a>
-                <a href="" class="section2" data-toggle="modal" data-target="#addingModal" onclick="dashboard('outcome', 'income');">Ausgabe</a>
+                <a href="" class="section2">Einnahme</a>
+                <a href="" class="section2">Ausgabe</a>
             </div> 
             <a class="section1" data-toggle="collapse" data-target="#overview_collapse">Übersicht</a>
             <div id="overview_collapse" class="collapse">
@@ -56,97 +56,9 @@
             <a href="export.xhtml" class="section1">Export</a>
 	</div>
 	<div id="header">
-            <h1>Haushaltsbuch</h1>
+            <h1>Export</h1>
 	</div>
 	<div id="content">
-		<div id="overview" class="panel panel-default">
-                    <div class="panel panel-heading">aktueller Monat: <span id="currentMonth"></span></div>
-			<div class="panel panel-body">
-                            <div class="css_bar_graph">
-                                <!-- graph -->
-                                <div class="graph">
-                                    <!-- grid -->
-                                    <ul class="grid">
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li class="bottom"></li>
-                                    </ul>
-                                    <!-- bars -->
-                                    <!-- 250px = 100% -->
-                                    <ul>
-                                        <li id="income_bar" class="bar nr_1 green" style="height: #{master.heightIncome}px;">
-                                            <div class="top"></div>
-                                            <div class="bottom"></div>
-                                            <span>
-                                                <h:outputText value="#{master.sumIncome}">
-                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                                </h:outputText>€
-                                            </span>
-                                        </li>
-                                        <li id="outcome_bar" class="bar nr_2 red" style="height: #{master.heightOutcome}px;">
-                                            <div class="top"></div>
-                                            <div class="bottom"></div>
-                                            <span>
-                                                <h:outputText value="#{master.sumOutcome}">
-                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                                </h:outputText>€
-                                            </span>
-                                        </li>
-                                    </ul>	
-                                </div>
-                            </div>
-                            <div id="additionalInfo">
-                                <p id="income_label">Einnahmen</p>
-                                <p id="outcome_label">Ausgaben</p>
-                                <br/>
-                                <p id="bilanz">Bilanz: 
-                                    <span id="#{master.balanceCss}">
-                                        <h:outputText value="#{master.balance}">
-                                            <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                        </h:outputText>€
-                                    </span>
-                                </p>
-                            </div>
-			</div>
-		</div>
-		<div id="list" class="panel panel-default">
-			<div class="panel-heading">
-				Zuletzt erfasste Ausgaben:
-			</div>
-			<div class="table-responsive panel-body">
-                                
-                            <button style="width:100%" type="button" onclick="modal('payments', 'income', 'outcome')" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addingModal">Hinzufügen</button>
-				<h:dataTable value="#{master.listLastTen}" var="pay" 
-                                                styleClass="table-hover table">
-                                        <h:column>
-                                                <f:facet name = "header">Datum</f:facet>    				
-                                                <h:outputText value="#{pay.created}">
-                                                    <f:convertDateTime pattern="dd.MM.yyyy" />
-                                                </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                                <f:facet name = "header">Kategorie</f:facet>
-                                                #{pay.category.name}
-                                        </h:column>
-                                        <h:column>
-                                                <f:facet name = "header">Betrag</f:facet>    				
-                                                <ui:fragment rendered="#{!pay.category.isIncome}">
-                                                <h:outputText style="color: red" value="#{pay.amount}">
-                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                                </h:outputText> <span style="color: red"> € </span>
-                                                </ui:fragment>
-                                                <ui:fragment rendered="#{pay.category.isIncome}">
-                                                <h:outputText style="color: yellowgreen" value="#{pay.amount}">
-                                                    <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                                </h:outputText> <span style="color: yellowgreen"> € </span>
-                                                </ui:fragment>
-                                        </h:column>
-                                </h:dataTable>
-			</div>
-		</div>
 	</div>
 	<div id="footer">
             <p>Version: 0.1</p>
@@ -166,15 +78,15 @@
                     </div>
                     <div class="modal-body">
                         <h:form>
-                            <fieldset id="radios"> 
+                            <fieldset> 
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <input type="radio" onclick="income('income', 'outcome')" id="radio_income" value="income" name="payments" checked="checked"/> 
+                                            <input type="radio" onclick="income('income', 'outcome')" id="in" value="income" name="payments" checked="checked"/> 
                                             <label for="in">Einnahme</label>
                                         </td>
                                         <td>
-                                            <input type="radio" onclick="outcome('outcome', 'income')" id="radio_outcome" value="outcome" name="payments" /> 
+                                            <input type="radio" onclick="outcome('outcome', 'income')" id="out" value="outcome" name="payments" /> 
                                             <label for="out">Ausgabe</label>
                                         </td>
                                     </tr>
@@ -189,9 +101,9 @@
                                                     <p>Kategorie:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu id="category_in" binding="#{category_in}">
+                                                    <h:selectOneMenu>
                                                         <f:selectItems value="#{master.categoriesIncome}" var="c"
-                                                                       itemLabel="#{c.name}" itemValue="#{c.id}" />
+                                                                       itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieEinnahme">Hinzufügen</button>
                                                 </td>                                     
@@ -201,7 +113,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <h:inputText id="amount_in" binding="#{amount_in}"/> €
+                                                    <input type="number" id="Betrag" name="Betrag" step="0.01"></input> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -209,9 +121,9 @@
                                                     <p>Person:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu id="person_in" binding="#{person_in}">
+                                                    <h:selectOneMenu>
                                                         <f:selectItems value="#{master.person}" var="p"
-                                                                       itemLabel="#{p.name}" itemValue="#{p.id}" />
+                                                                       itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
                                                 </td>
@@ -221,10 +133,10 @@
                                                     <p>Notiz:</p>
                                                 </td>
                                                 <td>
-                                                    <h:inputTextarea id="note_in" cols="35" rows="4" value="#{note_in}"/>
+                                                    <textarea id="Notiz" name="Notiz" cols="35" rows="4"></textarea>
                                                 </td>                                        
                                             </tr>
-                                            <tr><td><p:commandButton id="cb_in" value = "Hinzufügen" action="#{master.addPaymentIncome(person_in.value, category_in.value, amount_in.value, note_in)}" onclick="index.xhtml" /></td></tr>
+                                            <tr><td><button type="button">Hinzufügen</button></td></tr>
                                         </table>
                                     </fieldset>
                                 </div>
@@ -236,9 +148,9 @@
                                                     <p>Kategorie:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu id="category_out" binding="#{category_out}">
+                                                    <h:selectOneMenu>
                                                         <f:selectItems value="#{master.categoriesOutcome}" var="c"
-                                                                       itemLabel="#{c.name}" itemValue="#{c.id}" />
+                                                                       itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieAusgabe">Hinzufügen</button>
                                                 </td>                                     
@@ -248,7 +160,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <h:inputText id="amount_out" binding="#{amount_out}"/> €
+                                                    <input type="number" id="Betrag" name="Betrag" step="0.01"></input> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -256,9 +168,9 @@
                                                     <p>Person:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu id="person_out" binding="#{person_out}">
+                                                    <h:selectOneMenu>
                                                         <f:selectItems value="#{master.person}" var="p"
-                                                                       itemLabel="#{p.name}" itemValue="#{p.id}" />
+                                                                       itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
                                                 </td>
@@ -268,10 +180,10 @@
                                                     <p>Notiz:</p>
                                                 </td>
                                                 <td>
-                                                    <h:inputTextarea id="note_out" cols="35" rows="4" value="#{note_out}"/>
+                                                    <textarea id="Notiz" name="Notiz" cols="35" rows="4"></textarea>
                                                 </td>                                        
                                             </tr>
-                                            <tr><td><p:commandButton id="cb_out" value = "Hinzufügen" action="#{master.addPaymentOutcome(person_out.value, category_out.value, amount_out.value, note_out)}" onclick="index.xhtml" /></td></tr>
+                                            <tr><td><button type="button">Hinzufügen</button></td></tr>
                                         </table>
                                     </fieldset>
                                 </div>
@@ -292,8 +204,8 @@
                     <div class="modal-body">
                         <h:form id="Category_income">
                         Name der Kategorie für Einnahmen:
-                            <h:inputText id="category_income" binding="#{Category_in}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category_in.value, true)}" onclick="index.xhtml" />
+                            <h:inputText id="category_income" binding="#{Category}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, true)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
@@ -310,8 +222,8 @@
                     <div class="modal-body">
                         <h:form id="Category_outcome">
                         Name der Kategorie für Einnahmen:
-                            <h:inputText id="category_outcome" binding="#{Category_out}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category_out.value, false)}" onclick="index.xhtml" />
+                            <h:inputText id="category_outcome" binding="#{Category}" />
+                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, false)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
