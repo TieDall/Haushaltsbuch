@@ -5,12 +5,27 @@ function modal(payments, income, outcome) {
         var y = document.getElementById(outcome);
         x.style.display = "block";
         y.style.display = "none";
+        var z = document.getElementById("radios");
+        z.style.display = "block";
     } else {
         var x = document.getElementById(outcome);
         var y = document.getElementById(income);
         x.style.display = "block"; 
         y.style.display = "none";
+        var z = document.getElementById("radios");
+        z.style.display = "block";
     }
+}
+
+function dashboard(first, second) {
+    radiobtn = document.getElementById("radio_" + first);
+    radiobtn.checked = true;
+    var x = document.getElementById(first);
+    var y = document.getElementById(second);
+    var z = document.getElementById("radios");
+    x.style.display = "block";
+    y.style.display = "none";   
+    z.style.display = "none";
 }
 
 function income(income, outcome) {

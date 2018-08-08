@@ -1,6 +1,6 @@
 
 package managedBeans;
-import com.sun.faces.util.CollectionsUtils;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -377,6 +377,84 @@ public class Master {
         
         this.disconnectFromDB();
      
+        this.updateData();
+    }
+    
+    public void addPaymentOutcome(String person, String category, String amount, String note){
+        
+        this.connectToDB();
+
+        Category c = new Category();
+        Person per = new Person();
+        int cat_id = Integer.parseInt(category);
+        int per_id = Integer.parseInt(person);
+        
+        for (int i = 0; i < this.categoriesOutcome.size(); i++) {
+            if (this.categoriesOutcome.get(i).getId().equals(cat_id)) {
+                c = this.categoriesOutcome.get(i);
+            }
+        }
+        
+        for (int i = 0; i < this.person.size(); i++) {
+            if (this.person.get(i).getId().equals(per_id)) {
+                per = this.person.get(i);
+            }
+        }
+              
+        Payments p = new Payments();
+        p.setCategory(c);
+        p.setPerson(per);
+        float a = Float.parseFloat(amount);
+        p.setAmount(a);
+        p.setNote(note);
+        
+        Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+        p.setCreated(new Date(currentTimestamp.getTime()));
+           
+        session.beginTransaction();
+        session.save(p);
+        session.getTransaction().commit();
+        
+        this.disconnectFromDB();
+        this.updateData();
+    }
+
+    public void addPaymentIncome(String person, String category, String amount, String note){
+        
+        this.connectToDB();
+
+        Category c = new Category();
+        Person per = new Person();
+        int cat_id = Integer.parseInt(category);
+        int per_id = Integer.parseInt(person);
+        
+        for (int i = 0; i < this.categoriesIncome.size(); i++) {
+            if (this.categoriesIncome.get(i).getId().equals(cat_id)) {
+                c = this.categoriesIncome.get(i);
+            }
+        }
+        
+        for (int i = 0; i < this.person.size(); i++) {
+            if (this.person.get(i).getId().equals(per_id)) {
+                per = this.person.get(i);
+            }
+        }
+              
+        Payments p = new Payments();
+        p.setCategory(c);
+        p.setPerson(per);
+        float a = Float.parseFloat(amount);
+        p.setAmount(a);
+        p.setNote(note);
+        
+        Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+        p.setCreated(new Date(currentTimestamp.getTime()));
+           
+        session.beginTransaction();
+        session.save(p);
+        session.getTransaction().commit();
+        
+        this.disconnectFromDB();     
         this.updateData();
     }
 
