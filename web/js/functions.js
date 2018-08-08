@@ -13,6 +13,17 @@ function modal(payments, income, outcome) {
     }
 }
 
+function dashboard(first, second) {
+    radiobtn = document.getElementById("radio_" + first);
+    radiobtn.checked = true;
+    var x = document.getElementById(first);
+    var y = document.getElementById(second);
+    var z = document.getElementById("radios");
+    x.style.display = "block";
+    y.style.display = "none";   
+    z.style.display = "none";
+}
+
 function income(income, outcome) {
     var x = document.getElementById(income);
     var y = document.getElementById(outcome);
