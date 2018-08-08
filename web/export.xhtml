@@ -25,8 +25,8 @@
             <a href="index.xhtml" class="active">Dashboard</a>
             <a class="section1" data-toggle="collapse" data-target="#adding_collapse_mobile">Erfassung</a>		
             <div id="adding_collapse_mobile" class="collapse">
-                <a href="" class="section2">- Einnahme</a>
-                <a href="" class="section2">- Ausgabe</a>
+                <a href="" class="section2" data-toggle="modal" data-target="#addingModal" onclick="dashboard('income', 'outcome');">- Einnahme</a>
+                <a href="" class="section2" data-toggle="modal" data-target="#addingModal" onclick="dashboard('outcome', 'income');">- Ausgabe</a>
             </div> 
             <a class="section1" data-toggle="collapse" data-target="#overview_collapse_mobile">Übersicht</a>
             <div id="overview_collapse_mobile" class="collapse">
@@ -44,8 +44,8 @@
             <a href="index.xhtml" class="section1">Dashboard</a>
             <a class="section1" data-toggle="collapse" data-target="#adding_collapse">Erfassung</a>		
             <div id="adding_collapse" class="collapse">
-                <a href="" class="section2">Einnahme</a>
-                <a href="" class="section2">Ausgabe</a>
+                <a href="" class="section2" data-toggle="modal" data-target="#addingModal" onclick="dashboard('income', 'outcome');">Einnahme</a>
+                <a href="" class="section2" data-toggle="modal" data-target="#addingModal" onclick="dashboard('outcome', 'income');">Ausgabe</a>
             </div> 
             <a class="section1" data-toggle="collapse" data-target="#overview_collapse">Übersicht</a>
             <div id="overview_collapse" class="collapse">
