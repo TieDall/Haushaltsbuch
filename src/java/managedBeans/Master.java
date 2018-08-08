@@ -489,7 +489,7 @@ public class Master {
             .buildSessionFactory();
         session = sessionFactory.openSession();
         session.beginTransaction();
-        List result = session.createQuery( "from Payments order by created" ).list();
+        List result = session.createQuery( "from Payments order by created desc" ).list();
         this.payments = new ArrayList(result);
         session.getTransaction().commit();
     }
