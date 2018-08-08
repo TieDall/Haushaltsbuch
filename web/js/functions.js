@@ -5,11 +5,15 @@ function modal(payments, income, outcome) {
         var y = document.getElementById(outcome);
         x.style.display = "block";
         y.style.display = "none";
+        var z = document.getElementById("radios");
+        z.style.display = "block";
     } else {
         var x = document.getElementById(outcome);
         var y = document.getElementById(income);
         x.style.display = "block"; 
         y.style.display = "none";
+        var z = document.getElementById("radios");
+        z.style.display = "block";
     }
 }
 
