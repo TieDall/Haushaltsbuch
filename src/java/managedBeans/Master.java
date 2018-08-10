@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import model.Category;
+import model.Fixpayments;
 import model.Payments;
 import model.Person;
 import org.hibernate.Session;
@@ -38,6 +39,7 @@ public class Master {
     List<Category> categoriesIncome;
     List<Category> categoriesOutcome;
     List<Person> person;
+    
     
     // data overview list
     String inMonthData = "";
@@ -452,6 +454,86 @@ public class Master {
            
         session.beginTransaction();
         session.save(p);
+        session.getTransaction().commit();
+        
+        this.disconnectFromDB();     
+        this.updateData();
+    }
+    
+    public void addFixPaymentOutcome(String person, String category, String amount, String note, String regel){
+        
+        this.connectToDB();
+
+        Category c = new Category();
+        Person per = new Person();
+        int cat_id = Integer.parseInt(category);
+        int per_id = Integer.parseInt(person);
+        
+        for (int i = 0; i < this.categoriesOutcome.size(); i++) {
+            if (this.categoriesOutcome.get(i).getId().equals(cat_id)) {
+                c = this.categoriesOutcome.get(i);
+            }
+        }
+        
+        for (int i = 0; i < this.person.size(); i++) {
+            if (this.person.get(i).getId().equals(per_id)) {
+                per = this.person.get(i);
+            }
+        }
+          
+        Fixpayments fp = new Fixpayments();
+        fp.setCategory(c);
+        fp.setPerson(per);
+        float a = Float.parseFloat(amount);
+        fp.setAmount(a);
+        fp.setNote(note);
+        fp.setRegularityId(Integer.parseInt(regel));
+        
+        Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+        fp.setCreated(new Date(currentTimestamp.getTime()));
+           
+        session.beginTransaction();
+        session.save(fp);
+        session.getTransaction().commit();
+        
+        this.disconnectFromDB();
+        this.updateData();
+    }
+
+    public void addFixPaymentIncome(String person, String category, String amount, String note, String regel){
+        
+        this.connectToDB();
+
+        Category c = new Category();
+        Person per = new Person();
+        int cat_id = Integer.parseInt(category);
+        int per_id = Integer.parseInt(person);
+        
+        for (int i = 0; i < this.categoriesIncome.size(); i++) {
+            if (this.categoriesIncome.get(i).getId().equals(cat_id)) {
+                c = this.categoriesIncome.get(i);
+            }
+        }
+        
+        for (int i = 0; i < this.person.size(); i++) {
+            if (this.person.get(i).getId().equals(per_id)) {
+                per = this.person.get(i);
+            }
+        }
+              
+        Fixpayments fp = new Fixpayments();
+        fp.setCategory(c);
+        fp.setPerson(per);
+        float a = Float.parseFloat(amount);
+        fp.setAmount(a);
+        fp.setNote(note);
+        fp.setRegularityId(Integer.parseInt(regel));
+        
+        Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+        fp.setCreated(new Date(currentTimestamp.getTime()));
+           
+        session.beginTransaction();
+        session.save(fp);
         session.getTransaction().commit();
         
         this.disconnectFromDB();     

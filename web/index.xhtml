@@ -345,7 +345,7 @@
                         <h4 class="modal-title">Erfassung</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <h:form>
                             <fieldset> 
                                 <table width="100%">
                                     <tr>
@@ -369,9 +369,9 @@
                                                     <p>Kategorie:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu>
+                                                    <h:selectOneMenu id="fixcategory_in" binding="#{fixcategory_in}">
                                                         <f:selectItems value="#{master.categoriesIncome}" var="c"
-                                                                       itemLabel="#{c.name}" itemValue="#{c.name}" />
+                                                                       itemLabel="#{c.name}" itemValue="#{c.id}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieEinnahme">Hinzufügen</button>
                                                 </td>                                     
@@ -381,12 +381,12 @@
                                                     <p>Häufigkeit</p>
                                                 </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="Monatlich">Monatlich</option>
-                                                        <option value="Quartal">Quartal</option>
-                                                        <option value="Halbjährlich">Halbjährlich</option>
-                                                        <option value="Jährlich">Jährlich</option>
-                                                    </select>
+                                                    <h:selectOneMenu binding="#{regel_in}">
+                                                        <f:selectItem itemLabel="Monatlich" itemValue="1" />
+                                                        <f:selectItem itemLabel="Quartal" itemValue="2" />
+                                                        <f:selectItem itemLabel="Halbjährlich" itemValue="3" />
+                                                        <f:selectItem itemLabel="Jährlich" itemValue="4" />
+                                                    </h:selectOneMenu>
                                                 </td>                                     
                                             </tr>
                                             <tr>
@@ -394,7 +394,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="Betrag" name="Betrag"></input> €
+                                                    <h:inputText id="fixamount_in" binding="#{fixamount_in}"/> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -402,9 +402,9 @@
                                                     <p>Person:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu>
+                                                    <h:selectOneMenu id="fixperson_in" binding="#{fixperson_in}">
                                                         <f:selectItems value="#{master.person}" var="p"
-                                                                       itemLabel="#{p.name}" itemValue="#{p.name}" />
+                                                                       itemLabel="#{p.name}" itemValue="#{p.id}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
                                                 </td>
@@ -414,10 +414,10 @@
                                                     <p>Notiz:</p>
                                                 </td>
                                                 <td>
-                                                    <textarea id="Notiz" name="Notiz" cols="35" rows="4"></textarea>
+                                                    <h:inputTextarea id="fixnote_in" cols="35" rows="4" value="#{fixnote_in}"/>
                                                 </td>                                        
                                             </tr>
-                                            <tr><td><button type="button">Hinzufügen</button></td></tr>
+                                            <tr><td><p:commandButton id="cb_fix_in" value = "Hinzufügen" action="#{master.addFixPaymentIncome(fixperson_in.value, fixcategory_in.value, fixamount_in.value, fixnote_in, regel_in.value)}" onclick="index.xhtml" /></td></tr>
                                         </table>
                                     </fieldset>
                                 </div>
@@ -429,11 +429,24 @@
                                                     <p>Kategorie:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu>
+                                                    <h:selectOneMenu id="fixcategory_out" binding="#{fixcategory_out}">
                                                         <f:selectItems value="#{master.categoriesOutcome}" var="c"
-                                                                       itemLabel="#{c.name}" itemValue="#{c.name}" />
+                                                                       itemLabel="#{c.name}" itemValue="#{c.id}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieAusgabe">Hinzufügen</button>
+                                                </td>                                     
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p>Häufigkeit</p>
+                                                </td>
+                                                <td>
+                                                    <h:selectOneMenu binding="#{regel_out}">
+                                                        <f:selectItem itemLabel="Monatlich" itemValue="1" />
+                                                        <f:selectItem itemLabel="Quartal" itemValue="2" />
+                                                        <f:selectItem itemLabel="Halbjährlich" itemValue="3" />
+                                                        <f:selectItem itemLabel="Jährlich" itemValue="4" />
+                                                    </h:selectOneMenu>
                                                 </td>                                     
                                             </tr>
                                             <tr>
@@ -441,7 +454,7 @@
                                                     <p>Betrag:</p>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="Betrag" name="Betrag"></input> €
+                                                    <h:inputText id="fixamount_out" binding="#{fixamount_out}"/> €
                                                 </td>                                        
                                             </tr>
                                             <tr>
@@ -449,9 +462,9 @@
                                                     <p>Person:</p>
                                                 </td>
                                                 <td>
-                                                    <h:selectOneMenu>
+                                                    <h:selectOneMenu id="fixperson_out" binding="#{fixperson_out}">
                                                         <f:selectItems value="#{master.person}" var="p"
-                                                                       itemLabel="#{p.name}" itemValue="#{p.name}" />
+                                                                       itemLabel="#{p.name}" itemValue="#{p.id}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
                                                 </td>
@@ -461,15 +474,15 @@
                                                     <p>Notiz:</p>
                                                 </td>
                                                 <td>
-                                                    <textarea id="Notiz" name="Notiz" cols="35" rows="4"></textarea>
+                                                    <h:inputTextarea id="fixnote_out" cols="35" rows="4" value="#{fixnote_out}"/>
                                                 </td>                                        
                                             </tr>
-                                            <tr><td><button type="button">Hinzufügen</button></td></tr>
+                                            <tr><td><p:commandButton id="cb_fix_out" value = "Hinzufügen" action="#{master.addFixPaymentOutcome(fixperson_out.value, fixcategory_out.value, fixamount_out.value, fixnote_out, regel_out.value)}" onclick="index.xhtml" /></td></tr>
                                         </table>
                                     </fieldset>
                                 </div>
                             </div>
-                        </form>
+                        </h:form>
                     </div>
                 </div>
             </div>
