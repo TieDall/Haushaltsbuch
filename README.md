@@ -33,14 +33,15 @@ CREATE TABLE IF NOT EXISTS Payments (
   FOREIGN KEY (personID) REFERENCES Person (ID)
 ); 
 
-CREATE TABLE IF NOT EXISTS `fixpayments` (
-  `ID` int(11) NOT NULL,
-  `categoryID` int(11) NOT NULL,
-  `amount` float NOT NULL,
-  `personID` int(11) NOT NULL,
-  `note` varchar(250) DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `regularityID` int(11) NOT NULL
+CREATE TABLE IF NOT EXISTS Fixpayments (
+  ID INT NOT NULL AUTO_INCREMENT,
+  categoryID INT NOT NULL,
+  amount FLOAT NOT NULL,
+  personID INT NOT NULL,
+  note VARCHAR(250) DEFAULT NULL,
+  created DATETIME DEFAULT CURRENT_TIMESTAMP,
+  regularityID INT NOT NULL,
+  PRIMARY KEY (ID)
 );
 
 CREATE IF DEFINER=`root`@`localhost` EVENT `fixPaymentsHalfYear` ON SCHEDULE EVERY 6 MONTH STARTS '2018-01-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `payments`(`categoryID`, `amount`, `personID`, `note`) SELECT categoryID, amount, personID, note FROM fixpayments WHERE regularityID=3
