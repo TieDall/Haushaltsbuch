@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Haushaltsbuch</title>
         
@@ -26,11 +25,11 @@
                 var ctx = document.getElementById("piechartIncome");
                 var data = {
                     datasets: [{
-                        data: [#{master.inMonthData}],
-                        backgroundColor: [#{master.inMonthColor}],
+                        data: [#{overviewList.inMonthData}],
+                        backgroundColor: [#{overviewList.inMonthColor}],
                         label: "Einnahmen"
                     }],
-                    labels: [#{master.inMonthLabel}]
+                    labels: [#{overviewList.inMonthLabel}]
                 };
                 var options = {
                     responsive: false
@@ -45,11 +44,11 @@
                 var ctx = document.getElementById("piechartOutcome");
                 var data = {
                     datasets: [{
-                        data: [#{master.outMonthData}],
-                        backgroundColor: [#{master.outMonthColor}],
+                        data: [#{overviewList.outMonthData}],
+                        backgroundColor: [#{overviewList.outMonthColor}],
                         label: "Ausgaben"
                     }],
-                    labels: [#{master.outMonthLabel}]
+                    labels: [#{overviewList.outMonthLabel}]
                 };
                 var options = {
                     responsive: false
@@ -126,7 +125,7 @@
                         </div>  
                     </center>
                     <div id="list">
-                        <h:dataTable value="#{master.inMonthList}" var="pay" 
+                        <h:dataTable value="#{overviewList.inMonthList}" var="pay" 
                                     styleClass="table-hover table">
                             <h:column>
                                     <f:facet name = "header">Datum</f:facet>    				
@@ -173,7 +172,7 @@
                         </div>
                     </center>
                     <div id="list">
-                        <h:dataTable value="#{master.outMonthList}" var="pay" 
+                        <h:dataTable value="#{overviewList.outMonthList}" var="pay" 
                                     styleClass="table-hover table">
                             <h:column>
                                     <f:facet name = "header">Datum</f:facet>    				
@@ -248,7 +247,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesIncome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesIncome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieEinnahme">Hinzufügen</button>
@@ -268,7 +267,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
@@ -295,7 +294,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesOutcome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesOutcome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieAusgabe">Hinzufügen</button>
@@ -315,7 +314,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
@@ -351,7 +350,7 @@
                         <h:form id="Category_income">
                         Name der Kategorie für Einnahmen:
                             <h:inputText id="category_income" binding="#{Category}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, true)}" onclick="index.xhtml" />
+                            <h:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, true)}" />
                         </h:form>
                     </div>
                 </div>
@@ -369,7 +368,7 @@
                         <h:form id="Category_outcome">
                         Name der Kategorie für Einnahmen:
                             <h:inputText id="category_outcome" binding="#{Category}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, false)}" onclick="index.xhtml" />
+                            <h:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, false)}" />
                         </h:form>
                     </div>
                 </div>
@@ -387,7 +386,7 @@
                         <h:form id="Person">
                         Name der Person:
                             <h:inputText id="person" binding="#{person}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addPerson(person.value)}" onclick="index.xhtml" />
+                            <h:commandButton value = "Hinzufügen" action="#{adding.addPerson(person.value)}" />
                         </h:form>
                     </div>
                 </div>
@@ -428,7 +427,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesIncome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesIncome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieEinnahme">Hinzufügen</button>
@@ -461,7 +460,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
@@ -488,7 +487,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesOutcome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesOutcome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieAusgabe">Hinzufügen</button>
@@ -508,7 +507,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>

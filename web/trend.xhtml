@@ -29,11 +29,11 @@
                 };
                 var data = {
                     datasets: [{
-                        data: [#{master.trendHalfyearData}],
-                        backgroundColor: [#{master.trendHalfyearColor}],
+                        data: [#{overviewTrend.trendHalfyearData}],
+                        backgroundColor: [#{overviewTrend.trendHalfyearColor}],
                         label: "Bilanz"
                     }],
-                    labels: [#{master.trendHalfyearLabels}]
+                    labels: [#{overviewTrend.trendHalfyearLabels}]
                 };
                 var myBarChart = new Chart(ctx, {
                     type: 'bar',
@@ -101,15 +101,15 @@
                 <table>
                     <tr>
                         <td>Einnahmen:</td>
-                        <td>#{master.trendHalfyearIncome}€</td>
+                        <td>#{overviewTrend.trendHalfyearIncome}€</td>
                     </tr>
                     <tr>
                         <td>Ausgaben:</td>
-                        <td>#{master.trendHalfyearOutcome}€</td>
+                        <td>#{overviewTrend.trendHalfyearOutcome}€</td>
                     </tr>
                     <tr>
                         <td>Bilanz:</td>
-                        <td>#{master.trendHalfyearBalance}€</td>
+                        <td>#{overviewTrend.trendHalfyearBalance}€</td>
                     </tr>
                 </table>
             </div>
@@ -156,7 +156,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesIncome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesIncome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieEinnahme">Hinzufügen</button>
@@ -176,7 +176,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
@@ -203,7 +203,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesOutcome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesOutcome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieAusgabe">Hinzufügen</button>
@@ -223,7 +223,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
@@ -259,7 +259,7 @@
                         <h:form id="Category_income">
                         Name der Kategorie für Einnahmen:
                             <h:inputText id="category_income" binding="#{Category}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, true)}" onclick="index.xhtml" />
+                            <p:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, true)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                         <h:form id="Category_outcome">
                         Name der Kategorie für Einnahmen:
                             <h:inputText id="category_outcome" binding="#{Category}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addCategory(Category.value, false)}" onclick="index.xhtml" />
+                            <p:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, false)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
@@ -295,7 +295,7 @@
                         <h:form id="Person">
                         Name der Person:
                             <h:inputText id="person" binding="#{person}" />
-                            <p:commandButton value = "Hinzufügen" action="#{master.addPerson(person.value)}" onclick="index.xhtml" />
+                            <p:commandButton value = "Hinzufügen" action="#{adding.addPerson(person.value)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
@@ -336,7 +336,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesIncome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesIncome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieEinnahme">Hinzufügen</button>
@@ -369,7 +369,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
@@ -396,7 +396,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.categoriesOutcome}" var="c"
+                                                        <f:selectItems value="#{adding.categoriesOutcome}" var="c"
                                                                        itemLabel="#{c.name}" itemValue="#{c.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingKategorieAusgabe">Hinzufügen</button>
@@ -416,7 +416,7 @@
                                                 </td>
                                                 <td>
                                                     <h:selectOneMenu>
-                                                        <f:selectItems value="#{master.person}" var="p"
+                                                        <f:selectItems value="#{adding.person}" var="p"
                                                                        itemLabel="#{p.name}" itemValue="#{p.name}" />
                                                     </h:selectOneMenu>
                                                     <button type="button" data-toggle="modal" data-target="#addingPerson">Hinzufügen</button>
