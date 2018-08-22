@@ -7,6 +7,7 @@
 	width:250px;
 	height:100%;
 	padding-bottom:50px;
+        overflow: auto;
 }
 
 #nav a {
@@ -125,7 +126,7 @@
   color: black;
 }
 
-.active {
+.topnav .active {
   background-color: #4CAF50;
   color: white;
 }

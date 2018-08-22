@@ -24,3 +24,15 @@
     height: 300px;
 }
 
+/*
+    ============
+    media querys
+    ============
+*/
+
+@media screen and (max-width: 600px) {
+    .tab-content {
+        left:0;
+        top:215px;
+    }
+}

@@ -45,6 +45,8 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/haushaltsbuch?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password"/>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
+    <property name="hibernate.transaction.flush_before_completion">true</property>
     <mapping resource="model/Fixpayments.hbm.xml"/>
     <mapping resource="model/Category.hbm.xml"/>
     <mapping resource="model/Person.hbm.xml"/>

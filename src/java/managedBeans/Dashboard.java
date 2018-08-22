@@ -1,28 +1,26 @@
-
 package managedBeans;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import model.Category;
 import model.Payments;
-import model.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-@Named(value = "master")
-@ApplicationScoped
-public class Master {
-    
+@Named(value = "dashboard")
+@RequestScoped
+public class Dashboard {
+        
+    // db meta
     SessionFactory sessionFactory;
     Session session;
     
-    ArrayList<Payments> payments;
-    
     // data dashboard
+    ArrayList<Payments> payments;
     String heightIncome = "0";
     String heightOutcome = "0";
     float sumOutcome = 0;
@@ -31,104 +29,22 @@ public class Master {
     String balanceCss = "";
     ArrayList<Payments> listLastTen = new ArrayList<>();
     
-    // data form
-    List<Category> categoriesIncome;
-    List<Category> categoriesOutcome;
-    List<Person> person;
-    
-    public Master() {        
-        
-        this.payments = new ArrayList<>();
-        this.updateData();
-        
-    }
-    
-    private void loadPersons() {
-        session.beginTransaction();
-        List<Person> result = session.createQuery( "from Person" ).list();
-        ArrayList<Person> bufferPerson = new ArrayList<>();
-        for (Person per : result) {
-            if (!per.isIsDeleted()) {
-                bufferPerson.add(per);
-            }
-        }
-        this.person = bufferPerson.subList(0, bufferPerson.size());
-        session.getTransaction().commit();
-    }
-    
-    private void loadCategories() {
-        session.beginTransaction();
-        List<Category> result = session.createQuery( "from Category" ).list();
-        ArrayList<Category> bufferIncome = new ArrayList<>();
-        ArrayList<Category> bufferOutcome = new ArrayList<>();
-        for (Category cat : result) {
-            if (!cat.isIsDeleted()) {
-                if (cat.isIsIncome()) {
-                    bufferIncome.add(cat);
-                } else {
-                    bufferOutcome.add(cat);
-                }
-            }
-        }
-        this.categoriesIncome = bufferIncome.subList(0, bufferIncome.size());
-        this.categoriesOutcome = bufferOutcome.subList(0, bufferOutcome.size());
-        session.getTransaction().commit();
-    }
-    
-    public void addCategory(String name, boolean IsIncome){
-        
-        this.connectToDB();
-        
-        
-        Category c = new Category();
-        c.setIsDeleted(false);
-        c.setIsIncome(IsIncome);
-        c.setName(name);
-        
-        session.beginTransaction();
-        session.persist(c);
-        session.getTransaction().commit();
-        
-        this.disconnectFromDB();
-     
-        this.updateData();
-    }
-
-    public void addPerson(String name){
-        
-        this.connectToDB();
-        
-        
-        Person p = new Person();
-        p.setName(name);
-        
-        session.beginTransaction();
-        session.persist(p);
-        session.getTransaction().commit();
-        
-        this.disconnectFromDB();
-     
-        this.updateData();
-    }
-
     /**
-     * Updates data for visualisation.
+     * Constructor.
      */
-    private void updateData() {
-        System.out.println("Start");
-        this.connectToDB();       
+    public Dashboard() {
+        this.loadData();
+    }
+    
+    /**
+     * Loads data which is needed for dashboard.
+     */
+    private void loadData() {
+        this.connectToDB();
+        this.loadPayments();
         this.updateDashboardOverview();
         this.updateDashboardList();
-        this.loadPersons();
-        this.loadCategories();
         this.disconnectFromDB();
-    }
-    
-    /**
-     * Disconnect from database.
-     */
-    private void disconnectFromDB() {
-        session.close();
     }
     
     /**
@@ -139,15 +55,30 @@ public class Master {
             .configure("/model/hibernate.cfg.xml")
             .buildSessionFactory();
         session = sessionFactory.openSession();
+    }
+    
+    /**
+     * Disconnect from database.
+     */
+    private void disconnectFromDB() {
+        session.close();
+    }
+    
+    /**
+     * Loads payments and store in object var.
+     */
+    private void loadPayments() {  
         session.beginTransaction();
-        List result = session.createQuery( "from Payments order by created" ).list();
+        List result = session.createQuery( "from Payments order by created desc" ).list();
         this.payments = new ArrayList(result);
         session.getTransaction().commit();
+        for (Payments payment : this.payments) {
+            System.out.println("payment: "+payment.getAmount());
+        }
     }
     
     /**
      * Updates data for list on dashboard.
-     * NOTE: connection to database needed.
      */
     private void updateDashboardList() {
         // extract last 10 created data items
@@ -168,7 +99,6 @@ public class Master {
     
     /**
      * Updates data for overview on dashboard.
-     * NOTE: connection to database needed.
      */
     private void updateDashboardOverview() {        
         // extract data which was created in current month
@@ -218,7 +148,6 @@ public class Master {
             heightIncome = "250";
             float hOut = (outcome_sum / income_sum) * 250;
             heightOutcome = "" + hOut;
-            System.out.println("hout = " + hOut);
         } else if (outcome_sum > income_sum) {
             heightOutcome = "250";
             float hIn = (income_sum / outcome_sum) * 250;
@@ -229,7 +158,7 @@ public class Master {
     /*
         GETTER / SETTER
     */
-    
+
     public String getHeightIncome() {
         return heightIncome;
     }
@@ -270,14 +199,6 @@ public class Master {
         this.balance = balance;
     }
 
-    public String getBalanceCss() {
-        return balanceCss;
-    }
-
-    public void setBalanceCss(String balanceCss) {
-        this.balanceCss = balanceCss;
-    }
-
     public ArrayList<Payments> getListLastTen() {
         return listLastTen;
     }
@@ -286,28 +207,12 @@ public class Master {
         this.listLastTen = listLastTen;
     }
 
-    public List<Category> getCategoriesIncome() {
-        return categoriesIncome;
+    public String getBalanceCss() {
+        return balanceCss;
     }
 
-    public void setCategoriesIncome(List<Category> categoriesIncome) {
-        this.categoriesIncome = categoriesIncome;
+    public void setBalanceCss(String balanceCss) {
+        this.balanceCss = balanceCss;
     }
-
-    public List<Category> getCategoriesOutcome() {
-        return categoriesOutcome;
-    }
-
-    public void setCategoriesOutcome(List<Category> categoriesOutcome) {
-        this.categoriesOutcome = categoriesOutcome;
-    }
-
-    public List<Person> getPerson() {
-        return person;
-    }
-
-    public void setPerson(List<Person> person) {
-        this.person = person;
-    }
-   
+    
 }

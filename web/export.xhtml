@@ -3,72 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Haushaltsbuch</title>
         
         <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" href="css/sharedstyle.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/liststyle.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/dashboardstyle.css" media="screen" />
 	<script src="js/functions.js"></script>
         
         <link rel="stylesheet" href="css/bootstrap.min.css" />
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script> 
-        <script src="js/Chart.js"></script> 
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        
-        <script>
-            function drawPieIn() {
-                var ctx = document.getElementById("piechartIncome");
-                var data = {
-                    datasets: [{
-                        data: [#{overviewList.inMonthData}],
-                        backgroundColor: [#{overviewList.inMonthColor}],
-                        label: "Einnahmen"
-                    }],
-                    labels: [#{overviewList.inMonthLabel}]
-                };
-                var options = {
-                    responsive: false
-                };
-                var myPieChart = new Chart(ctx,{
-                    type: 'pie',
-                    data: data,
-                    options: options
-                });
-            }
-            function drawPieOut() {
-                var ctx = document.getElementById("piechartOutcome");
-                var data = {
-                    datasets: [{
-                        data: [#{overviewList.outMonthData}],
-                        backgroundColor: [#{overviewList.outMonthColor}],
-                        label: "Ausgaben"
-                    }],
-                    labels: [#{overviewList.outMonthLabel}]
-                };
-                var options = {
-                    responsive: false
-                };
-                var myPieChart = new Chart(ctx,{
-                    type: 'pie',
-                    data: data,
-                    options: options
-                });
-            }
-            $(document).ready(function() {
-                drawPieIn();
-                drawPieOut();
-            });
-        </script>
     </h:head>
     <h:body>
-        <div id="header">
-            <h1>Kategorien</h1>
-	</div>
         <div class="topnav" id="myTopnav">
             <a href="index.xhtml" class="active">Dashboard</a>
             <a class="section1" data-toggle="collapse" data-target="#adding_collapse_mobile">Erfassung</a>		
@@ -103,107 +55,10 @@
             <a href="" class="section1" data-toggle="modal" data-target="#fixpaymentsModal" onclick="modal('fixpayments', 'fixincome', 'fixoutcome');" >Fixe Zahlungen</a>
             <a href="export.xhtml" class="section1">Export</a>
 	</div>
+	<div id="header">
+            <h1>Export</h1>
+	</div>
 	<div id="content">
-            <ul class="nav nav-tabs nav-justified">
-                <li class="active"><a data-toggle="pill" href="#incomeTab">Einnahmen</a></li>
-                <li><a data-toggle="pill" href="#outcomeTab">Ausgaben</a></li>
-            </ul>
-            <div class="tab-content">
-                <div id="incomeTab" class="tab-pane fade in active">
-                    <div class="selectionIntervall">
-                        <select>
-                            <option disabled="true">Woche</option>
-                            <option selected="true">Monat</option>
-                            <option disabled="true">Quartal</option>
-                            <option disabled="true">Halbjahr</option>
-                            <option disabled="true">Jahr</option>
-                        </select>
-                    </div>
-                    <center>
-                        <div class="chart-container">
-                            <canvas id="piechartIncome" width="500" height="270"></canvas>
-                        </div>  
-                    </center>
-                    <div id="list">
-                        <h:dataTable value="#{overviewList.inMonthList}" var="pay" 
-                                    styleClass="table-hover table">
-                            <h:column>
-                                    <f:facet name = "header">Datum</f:facet>    				
-                                    <h:outputText value="#{pay.created}">
-                                        <f:convertDateTime pattern="dd.MM.yyyy" />
-                                    </h:outputText>
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Kategorie</f:facet>
-                                    #{pay.category.name}
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Betrag</f:facet>    				
-                                    <h:outputText value="#{pay.amount}">
-                                        <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                    </h:outputText>€
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Notiz</f:facet>    				
-                                    <h:outputText value="#{pay.note}">
-                                    </h:outputText>
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Person</f:facet>    				
-                                    <h:outputText value="#{pay.person.name}">
-                                    </h:outputText>
-                            </h:column>
-                        </h:dataTable>
-                    </div>
-                </div>
-                <div id="outcomeTab" class="tab-pane fade">
-                    <div class="selectionIntervall">
-                        <select>
-                            <option disabled="true">Woche</option>
-                            <option selected="true">Monat</option>
-                            <option disabled="true">Quartal</option>
-                            <option disabled="true">Halbjahr</option>
-                            <option disabled="true">Jahr</option>
-                        </select>
-                    </div>
-                    <center>
-                        <div class="chart-container">
-                            <canvas id="piechartOutcome" width="500" height="270"></canvas>
-                        </div>
-                    </center>
-                    <div id="list">
-                        <h:dataTable value="#{overviewList.outMonthList}" var="pay" 
-                                    styleClass="table-hover table">
-                            <h:column>
-                                    <f:facet name = "header">Datum</f:facet>    				
-                                    <h:outputText value="#{pay.created}">
-                                        <f:convertDateTime pattern="dd.MM.yyyy" />
-                                    </h:outputText>
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Kategorie</f:facet>
-                                    #{pay.category.name}
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Betrag</f:facet>    				
-                                    <h:outputText value="#{pay.amount}">
-                                        <f:convertNumber groupingUsed="true" minFractionDigits="2"/>
-                                    </h:outputText>€
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Notiz</f:facet>    				
-                                    <h:outputText value="#{pay.note}">
-                                    </h:outputText>
-                            </h:column>
-                            <h:column>
-                                    <f:facet name = "header">Person</f:facet>    				
-                                    <h:outputText value="#{pay.person.name}">
-                                    </h:outputText>
-                            </h:column>
-                        </h:dataTable>
-                    </div>
-                </div>
-            </div>
 	</div>
 	<div id="footer">
             <p>Version: 0.1</p>
@@ -350,7 +205,7 @@
                         <h:form id="Category_income">
                         Name der Kategorie für Einnahmen:
                             <h:inputText id="category_income" binding="#{Category}" />
-                            <h:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, true)}" />
+                            <p:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, true)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
@@ -368,7 +223,7 @@
                         <h:form id="Category_outcome">
                         Name der Kategorie für Einnahmen:
                             <h:inputText id="category_outcome" binding="#{Category}" />
-                            <h:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, false)}" />
+                            <p:commandButton value = "Hinzufügen" action="#{adding.addCategory(Category.value, false)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
@@ -386,7 +241,7 @@
                         <h:form id="Person">
                         Name der Person:
                             <h:inputText id="person" binding="#{person}" />
-                            <h:commandButton value = "Hinzufügen" action="#{adding.addPerson(person.value)}" />
+                            <p:commandButton value = "Hinzufügen" action="#{adding.addPerson(person.value)}" onclick="index.xhtml" />
                         </h:form>
                     </div>
                 </div>
