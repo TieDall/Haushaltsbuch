@@ -59,3 +59,10 @@ function currentMonth() {
     var htmlComp = document.getElementById("currentMonth");
     htmlComp.innerHTML = thisMonth;
 }
+
+function mdlClsBtn() {
+    var mdlClose = document.getElementsByClassName("btnClose");
+    for (var i = 0, max = mdlClose.length; i < max; i++) {
+        mdlClose[i].innerHTML = "&times;";
+    }
+}

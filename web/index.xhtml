@@ -17,13 +17,16 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script> 
         
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>        
+        <script>
+            $(document).ready(function() {
+                mdlClsBtn();
+            });
+        </script>
     </h:head>
     <h:body onload="currentMonth();">
         <ui:include src="nav.xhtml" />
-	<div id="header">
-            <h1>Haushaltsbuch</h1>
-	</div>
+        <ui:include src="header.xhtml" />
 	<div id="content">
 		<div id="overview" class="panel panel-default">
                     <div class="panel panel-heading">aktueller Monat: <span id="currentMonth"></span></div>
@@ -114,9 +117,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="footer">
-            <p>Version: 0.1</p>
-	</div>
+	<ui:include src="footer.xhtml"/>
         <ui:include src="modals.xhtml"/>
     </h:body>
 </html>
