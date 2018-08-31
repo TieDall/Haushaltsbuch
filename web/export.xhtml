@@ -24,6 +24,10 @@
         <ui:include src="nav.xhtml" />
         <ui:include src="header.xhtml" />
 	<div id="content">
+            <h:form>
+                <h:commandButton value="Generate" action="#{export.generate()}" />
+            </h:form>
+            <a href="#{export.link}">Download</a>
 	</div>
 	<ui:include src="footer.xhtml"/>
         <ui:include src="modals.xhtml"/>
