@@ -2,6 +2,11 @@
 <project xmlns="http://www.netbeans.org/ns/project/1">
     <type>org.netbeans.modules.web.project</type>
     <configuration>
+        <buildExtensions xmlns="http://www.netbeans.org/ns/ant-build-extender/1">
+            <extension file="jaxws-build.xml" id="jaxws">
+                <dependency dependsOn="wsimport-client-generate" target="-pre-pre-compile"/>
+            </extension>
+        </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
             <name>Haushaltsbuch</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
@@ -16,6 +21,10 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.mysql-connector-java-5.1.23-bin.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.hibernate-c3p0-4.0.0.CR2.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
