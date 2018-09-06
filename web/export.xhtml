@@ -25,9 +25,29 @@
         <ui:include src="header.xhtml" />
 	<div id="content">
             <h:form>
-                <h:commandButton value="Generate" action="#{export.generate()}" />
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Kategorie Einnahmen Monat (pie)</td>
+                            <td>Bilanz (bar)</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Generieren" action="#{export.generatePie()}" />
+                            </td>
+                            <td>
+                                <h:commandButton value="Generieren" action="#{export.generateBar()}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="#{export.linkPie}">Download</a></td>
+                            <td><a href="#{export.linkBar}">Download</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </h:form>
-            <a href="#{export.link}">Download</a>
 	</div>
 	<ui:include src="footer.xhtml"/>
         <ui:include src="modals.xhtml"/>
