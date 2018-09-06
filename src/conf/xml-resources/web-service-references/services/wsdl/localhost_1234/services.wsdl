@@ -4,21 +4,40 @@
 <xsd:import namespace="http://ws/" schemaLocation="http://localhost:1234/services?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="createPDF"></message>
-<message name="createPDFResponse"></message>
+<message name="createPieChart"></message>
+<message name="createPieChartResponse"></message>
 <message name="IOException">
 <part name="fault" element="tns:IOException"></part>
 </message>
+<message name="createBarChart"></message>
+<message name="createBarChartResponse"></message>
 <portType name="PDFGenerator">
-<operation name="createPDF">
-<input wsam:Action="http://ws/PDFGenerator/createPDFRequest" message="tns:createPDF"></input>
-<output wsam:Action="http://ws/PDFGenerator/createPDFResponse" message="tns:createPDFResponse"></output>
-<fault message="tns:IOException" name="IOException" wsam:Action="http://ws/PDFGenerator/createPDF/Fault/IOException"></fault>
+<operation name="createPieChart">
+<input wsam:Action="http://ws/PDFGenerator/createPieChartRequest" message="tns:createPieChart"></input>
+<output wsam:Action="http://ws/PDFGenerator/createPieChartResponse" message="tns:createPieChartResponse"></output>
+<fault message="tns:IOException" name="IOException" wsam:Action="http://ws/PDFGenerator/createPieChart/Fault/IOException"></fault>
+</operation>
+<operation name="createBarChart">
+<input wsam:Action="http://ws/PDFGenerator/createBarChartRequest" message="tns:createBarChart"></input>
+<output wsam:Action="http://ws/PDFGenerator/createBarChartResponse" message="tns:createBarChartResponse"></output>
+<fault message="tns:IOException" name="IOException" wsam:Action="http://ws/PDFGenerator/createBarChart/Fault/IOException"></fault>
 </operation>
 </portType>
 <binding name="PDFGeneratorPortBinding" type="tns:PDFGenerator">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="createPDF">
+<operation name="createPieChart">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://ws/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://ws/"></soap:body>
+</output>
+<fault name="IOException">
+<soap:fault name="IOException" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="createBarChart">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://ws/"></soap:body>

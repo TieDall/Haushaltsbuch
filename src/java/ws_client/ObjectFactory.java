@@ -1,5 +1,5 @@
 
-package ws;
+package ws_client;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

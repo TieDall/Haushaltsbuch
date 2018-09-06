@@ -1,5 +1,5 @@
 
-package ws;
+package ws_client;
 
 import javax.xml.ws.WebFault;
 
