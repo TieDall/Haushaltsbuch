@@ -11,7 +11,7 @@
         <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" href="css/sharedstyle.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/dashboardstyle.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/exportstyle.css" media="screen" />
 	<script src="js/functions.js"></script>
         
         <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -24,8 +24,9 @@
         <ui:include src="nav.xhtml" />
         <ui:include src="header.xhtml" />
 	<div id="content">
+            <center>
             <h:form>
-                <table>
+                <table class="table-striped">
                     <thead>
                         <tr>
                             <td>Kategorie Einnahmen Monat (pie)</td>
@@ -42,12 +43,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td><object width="400" height="515" type="application/pdf" data="#{export.linkPie}"></object></td>
+                            <td><object width="400" height="515" type="application/pdf" data="#{export.linkBar}"></object></td>
+                        </tr>
+                        <tr>
                             <td><a href="#{export.linkPie}">Download</a></td>
                             <td><a href="#{export.linkBar}">Download</a></td>
                         </tr>
                     </tbody>
                 </table>
             </h:form>
+            </center>
 	</div>
 	<ui:include src="footer.xhtml"/>
         <ui:include src="modals.xhtml"/>

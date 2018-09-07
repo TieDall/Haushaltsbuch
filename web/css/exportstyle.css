@@ -1,0 +1,11 @@
+table {
+    width:70%;
+}
+
+thead {
+    font-weight: bold;
+}
+
+td {
+    padding:25px;
+}
