@@ -8,11 +8,13 @@ CREATE DATABASE IF NOT EXISTS Haushaltsbuch;
 
 CREATE TABLE IF NOT EXISTS Category (
   ID INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50) NOT NULL UNIQUE,
+  name VARCHAR(50) NOT NULL,
   is_income BIT(1) NOT NULL,
   is_deleted BIT(1) NOT NULL,
   PRIMARY KEY (ID)
 );
+
+ALTER TABLE `haushaltsbuch`.`category` ADD UNIQUE `single` (`name`, `is_income`);
 
 CREATE TABLE Person (
   ID INT NOT NULL AUTO_INCREMENT,
